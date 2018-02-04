@@ -1,0 +1,44 @@
+Package: appraiseR
+Title: Tools for Real Estate Appraisal
+Version: 0.1.0.9000
+Authors@R: person("Luiz", "Droubi", email = "lfpdroubi@gmail.com", role = c("aut", "cre"))
+URL: https://github.com/lfpdroubi/REATOOLS
+BugReports: https://github.com/lfpdroubi/REATOOLS/issues
+Description: A set of tools that solves a common set of problems for Real
+    Estate Appraisals. Its computations are based on the criteria stablished
+    in brazilian standard NBR-14.653-2.
+Depends: 
+    R (>= 3.4)
+License: MIT + file LICENSE
+LazyData: true
+Imports: 
+    dplyr,
+    ggplot2,
+    gtools,
+    magrittr,
+    miscTools,
+    plyr,
+    pryr,
+    RcppEigen,
+    reshape2,
+    rlang,
+    scales,
+    stats,
+    tibble
+Suggests: 
+    car,
+    DT,
+    ggvis,
+    latex2exp,
+    leaflet,
+    lmtest,
+    plotmo,
+    raster,
+    shiny,
+    sp,
+    testthat,
+    gridExtra,
+    knitr,
+    rmarkdown
+RoxygenNote: 6.0.1
+VignetteBuilder: knitr

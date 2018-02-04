@@ -1,0 +1,16 @@
+endereco, valor_unitario, area, dist_b_mar, zoneamento
+"vidal ramos / apostolo paschoal",  130.95,  420, 230, 3
+"antonio p moraes / jose da rosa",  108.48, 1014, 580, 2
+"antonio heil",                     300.00,  900,  40, 3
+"joao luiz",                        356.45, 1543,  10, 2
+"monel moura",                      153.06,  980, 330, 2
+"madre villac / afonso c da veiga", 166.67,  420, 110, 3
+"madre villac",                     231.48, 1080, 110, 2
+"antonio p de moraes",              258.33,  600,  30, 3
+"prudente de moraes / jose da rosa", 87.08,  689, 580, 2
+"vidal ramos",                      250.00,  840,  80, 3
+"apostolo paschoal",                144.44,  450, 220, 3
+"higino de brito",                   70.59,  425, 480, 1
+"rua das flores",                    57.97,  276, 620, 1
+"madre villac / kalifa",            200.00,  450, 110, 3
+"madre villac",                     225.00, 2000, 110, 2
