@@ -1,24 +1,8 @@
----
-output:
-  md_document:
-    variant: markdown_github
----
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, echo = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "README-"
-)
-```
-
 appraiseR is a set package built in order to help engineers to appraise Real Estate in Brazil market.
 
 To install this package from github:
 
-```{r, eval = FALSE}
+``` r
 devtools::install_github("droubi/appraiseR")
 ```
-
