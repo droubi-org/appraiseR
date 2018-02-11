@@ -26,7 +26,7 @@ AREA_CONSTRUIDA <- function(area_terreno, IA, np){
   area_construida
 }
 
-#' @rdname involutivo
+
 #' Overall Sales Value calculation
 #'
 #' @param area_construida Building area (sq. meters)
@@ -41,7 +41,7 @@ VGV <- function(area_construida, valor_unitario){
   vgv
 }
 
-#' @rdname involutivo
+
 #' Investment cash flow
 #'
 #' @param cc construction cost
@@ -61,7 +61,7 @@ FCI <- function(cc, wc, bdi_c, index = seq(0, length(wc) - 1)){
   fci
 }
 
-#' @rdname involutivo
+
 #' Sales Cash Flow
 #'
 #' @param vgv overall selling value
@@ -77,7 +77,7 @@ FCV <- function(vgv, wv, index = seq(0, length(wv) - 1)){
   vendas
 }
 
-#' @rdname involutivo
+
 #' Net Cash Flow
 #'
 #' @param fcv the expected sales cash flow
@@ -99,7 +99,7 @@ FCL <- function(fcv, fci, bdi_i, cor){
   fcl %>% dplyr::select(Periodo, FCL)
 }
 
-#' @rdname involutivo
+
 #' Cash Flow table
 #'
 #' @examples
@@ -118,7 +118,7 @@ FC <- function(fcv, fci, bdi_i, cor, tma){
                   FCL_descontado = FCL*fator_VP)
 }
 
-#' @rdname involutivo
+
 #' Net Present Value
 #'
 #' @param fcl the Net Cash Flow of the project
@@ -137,7 +137,7 @@ VPL <- function(fcl, tma){
 
 ## Análise de sensibilidade
 
-#' @rdname involutivo
+
 #' Sensibilidade aa TMA
 #'
 #' @examples
@@ -163,7 +163,7 @@ sensibilidade_tma <- function(range, fcl){
   tma
 }
 
-#' @rdname involutivo
+
 #' Sensibilidade-custo do VPL
 #'
 #' @examples
@@ -194,7 +194,7 @@ sensibilidade_custo <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
   cc
 }
 
-#' @rdname involutivo
+
 #' Sensibilidade-venda do VPL
 #'
 #' @examples
@@ -224,7 +224,7 @@ sensibilidade_venda <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
   v
 }
 
-#' @rdname involutivo
+
 #' Sensibilidade-BDI do Incorporador
 #'
 #' @examples
@@ -251,7 +251,7 @@ sensibilidade_bdi_i <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
   bdi
 }
 
-#' @rdname involutivo
+
 #' Sensibilidade-BDI do Construtor
 #'
 #' @examples
@@ -278,7 +278,7 @@ sensibilidade_bdi_c <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
   bdi
 }
 
-#' @rdname involutivo
+
 #' Sensibilidade-Fluxo de Vendas
 #'
 #' @examples
@@ -312,9 +312,15 @@ sensibilidade_vv <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
   vpl
 }
 
-## Simulacoes
-
-#' @rdname involutivo
+#' Simulação com o Método de Monte Carlo
+#'
+#' @param Nsim Número de simulações
+#' @param ranges Intervalos de variação de cada variável
+#' @param variables Variáveis utilizadas para o computo do VPL
+#' @param distribution Distribuição a priori a ser utilizada para
+#' gerar as  variáveis
+#' @param params parâmtros a serem utilizados pelas distribuições a priori.
+#' @param dependencia matriz de covariância entre as variáveis
 #'
 #' @examples
 #' ## Simulacao de Monte Carlo com distribuição uniforme e dependencia total
