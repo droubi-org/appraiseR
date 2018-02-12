@@ -27,10 +27,10 @@ power_plot.lm <- function(object, ...) {
   Y <- data[, attr(z$terms, "response")]
   Y_ajustado <- z$fitted.values
   invres <- data.frame(Y, Y_ajustado)
-  p <- ggplot2::ggplot(data = invres, ggplot2::aes(x = Y,
-                                                   y = Y_ajustado)) + ggplot2::geom_point() +
-    ggplot2::ylab(latex2exp::TeX("$\\hat{Y}$")) +
-    ggplot2::geom_abline()
+  p <- ggplot(data = invres, aes(x = Y, y = Y_ajustado)) + 
+    geom_point() +
+    ylab(latex2exp::TeX("$\\hat{Y}$")) +
+    geom_abline()
   p
 }
 
@@ -44,7 +44,6 @@ power_plot.lm <- function(object, ...) {
 power_plot.bestfit <- function(object, fit = 1, ...) {
     s <- summary(object, fit = fit)
     z <- s$fit
-
     p <- power_plot.lm(z)
     p
 }

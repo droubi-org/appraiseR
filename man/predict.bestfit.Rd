@@ -30,7 +30,7 @@ in NBR-14.653-2 (80\%)}
 Predict values based on a \code{\link{bestfit}} object.
 }
 \examples{
-best_fit <- bestfit(Valor_Total ~ . - lat - lon, data = centro_2015)
+best_fit <- bestfit(valor ~ ., data = centro_2015@data)
 p <- predict(best_fit, interval = "confidence")
 p
 
