@@ -3,17 +3,18 @@
 #' \code{graphical summary} creates standardized boxplots for data frames visualizations.
 #'
 #' @param formula a generic formula.
-#' @param df a dataframe.
+#' @param data a dataframe.
 #' @export
 #' @examples
-#' graphic_summary(valor ~ ., centro_2015@data)
+#' data <- as.data.frame(centro_2015@data)
+#' graphic_summary(valor ~ ., data = data)
 
-graphic_summary <- function(formula, df) {
-  mf <- stats::model.frame(formula = formula, data = df)
+graphic_summary <- function(formula, data) {
+  mf <- stats::model.frame(formula = formula, data = data)
 
-  predictors <- attr(stats::terms.formula(x = formula, data = df),
+  predictors <- attr(stats::terms.formula(x = formula, data = data),
                      "term.labels")
-  response <- colnames(mf)[attr(stats::terms.formula(x = formula, data = df),
+  response <- colnames(mf)[attr(stats::terms.formula(x = formula, data = data),
                                 "response")]
 
   parameters <- union(response, predictors)
@@ -24,9 +25,9 @@ graphic_summary <- function(formula, df) {
   p <- list()
 
   for (i in parameters) {
-    if (df %>% dplyr::select(i) %>% unlist() %>% is.factor)
-      p[[i]] <- bboxplot.default(y = response, g = i, df = df)
-    else p[[i]] <- bboxplot.default(y = i, df = df)
+    if (is.factor(data[,i]))
+      p[[i]] <- bboxplot.default(y = response, g = i, data = data)
+    else p[[i]] <- bboxplot.default(y = i, data = data)
 
   }
 

@@ -13,6 +13,10 @@ License: MIT + file LICENSE
 LazyData: true
 Imports: 
     dplyr,
+    tibble,
+    readr,
+    forcats,
+    sp,
     ggplot2,
     gtools,
     magrittr,
@@ -23,8 +27,7 @@ Imports:
     reshape2,
     rlang,
     scales,
-    stats,
-    tibble
+    stats
 Suggests: 
     car,
     DT,

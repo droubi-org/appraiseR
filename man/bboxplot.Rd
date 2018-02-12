@@ -35,12 +35,12 @@ within levels of the grouping variable(s) g, etc., usually factors.}
 
 \item{\dots}{further arguments passed to \code{\link[ggplot2]{geom_boxplot}}.}
 
-\item{df}{a dataframe containing the variables.}
-
 \item{y}{a numeric variable for which the boxplot is to be constructed.}
 
 \item{g}{a grouping variable, usually a factor, for constructing parallel
 boxplots.}
+
+\item{data}{a dataframe containing the variables.}
 
 \item{formula}{A ‘model’ formula, of the form ~ y to produce a boxplot for
 the variable y, or of the form y ~ g to produce parallel boxplots for y
@@ -61,13 +61,15 @@ Create boxplots with \link{ggplot2}.
 Beautiful boxplots with ggplot2
 }
 \examples{
-bboxplot("valor", df = centro_2015@data)
-bboxplot("valor", "padrao", centro_2015@data)
-bboxplot(valor~padrao, centro_2015@data)
-bboxplot(~valor, centro_2015@data)
-bboxplot("Valor_Total", data = centro_2015)
-bboxplot("Valor_Total", "Padrao", centro_2015)
+data <- as.data.frame(centro_2015@data)
+bboxplot("valor", data = data)
+bboxplot("valor", "padrao", data)
+bboxplot(valor~padrao, data)
+bboxplot(~valor, data)
+data <- as.data.frame(centro_2015@data)
+bboxplot(y = "valor", data = data)
+bboxplot(y = "valor", g = "padrao", data = data)
 
-bboxplot(Valor_Total~Padrao, centro_2015)
-bboxplot(~Valor_Total, centro_2015)
+bboxplot(valor ~ padrao, data)
+bboxplot(~ valor, data)
 }

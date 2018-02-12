@@ -10,8 +10,9 @@
 #' @export
 #' 
 #' @examples
-#' bboxplot("Valor_Total", data = centro_2015)
-#' bboxplot("Valor_Total", "Padrao", centro_2015)
+#' data <- as.data.frame(centro_2015@data)
+#' bboxplot(y = "valor", data = data)
+#' bboxplot(y = "valor", g = "padrao", data = data)
 #' 
 bboxplot <- function(y, g, data) UseMethod("bboxplot")
 
@@ -23,26 +24,26 @@ bboxplot.default <- function(y, g, data){
   if (missing(g)) {
     out <- grDevices::boxplot.stats(data[, y])$out
     if (length(out) == 0) {
-      p <- ggplot2::ggplot(data, ggplot2::aes_string(x = 1, y = y)) +
-        ggplot2::geom_boxplot(fill = "grey80") + ggplot2::geom_rug() +
-        ggplot2::xlab("")
+      p <- ggplot(data, aes_string(x = 1, y = y)) +
+        geom_boxplot(fill = "grey80") + geom_rug() +
+        xlab("")
     } else {
-      p <- ggplot2::ggplot(data, ggplot2::aes_string(x = 1, y = y)) +
-        ggplot2::geom_boxplot(fill = "grey80", outlier.colour = "red") + 
-        ggplot2::geom_text(data = data[match(out, data[,y]),],
-                           ggplot2::aes_string(x = 1, y = y, label = "id"),
+      p <- ggplot(data, aes_string(x = 1, y = y)) +
+        geom_boxplot(fill = "grey80", outlier.colour = "red") + 
+        geom_text(data = data[match(out, data[,y]),],
+                           aes_string(x = 1, y = y, label = "id"),
                            hjust=-1, size=4) + 
-        ggplot2::geom_rug() + ggplot2::xlab("")
+        geom_rug() + xlab("")
     }
   } else {
     if (is.character(data[, g])) data[, g] <- as.factor(data[, g])
     out <- grDevices::boxplot.stats(data[, y])
-    p <- ggplot2::ggplot(data,
-                         ggplot2::aes_string(x = data[, g], y = y)) +
-      ggplot2::xlab(g) + 
-      ggplot2::geom_boxplot(ggplot2::aes_string(fill = g),
+    p <- ggplot(data,
+                         aes_string(x = data[, g], y = y)) +
+      xlab(g) + 
+      geom_boxplot(aes_string(fill = g),
                             outlier.colour = "red") +
-      ggplot2::geom_rug() + ggplot2::theme(legend.position="none")
+      geom_rug() + theme(legend.position="none")
   }
   return(p)
 }
@@ -52,8 +53,8 @@ bboxplot.default <- function(y, g, data){
 #'   within levels of the grouping variable(s) g, etc., usually factors.
 #' @param data A data frame containing the variables in the formula.
 #' @examples
-#' bboxplot(Valor_Total~Padrao, centro_2015)
-#' bboxplot(~Valor_Total, centro_2015)
+#' bboxplot(valor ~ padrao, data)
+#' bboxplot(~ valor, data)
 
 #' @rdname bboxplot
 #' @export bboxplot.formula
@@ -63,7 +64,9 @@ bboxplot.formula <- function(formula, data) {
                                 "response")
   var <- attr(terms.formula(formula, data = data), "term.labels")
   
-  if (response == 0) p <- bboxplot.default(y = var, data = data) else {
+  if (response == 0) 
+    p <- bboxplot.default(y = var, data = data) 
+  else {
     response <- colnames(data)[response]
     if (is.character(data[, var])) data[, var] <- as.factor(data[, var])
     p <- bboxplot.default(y = response, g = var, data = data)
@@ -80,7 +83,7 @@ bboxplot.formula <- function(formula, data) {
 #'   
 #' @export
 #' @examples
-#' plotdf(Valor_Total ~ . - lat - lon, centro_2015)
+#' plotdf(valor ~ . , data)
 
 plotdf <- function(formula, data){
   mf <- stats::model.frame(formula = formula, data = data)
@@ -95,9 +98,12 @@ plotdf <- function(formula, data){
   par2 <- ceiling(r/par1)
   p <- list()
 
-  for (i in parameters) if (is.character(data[, i]) | is.factor(data[, i])) 
-    p[[i]] <- bboxplot.default(y = response, g = i, data = data) else
+  for (i in parameters) {
+    if (is.character(data[, i]) | is.factor(data[, i])) 
+      p[[i]] <- bboxplot.default(y = response, g = i, data = data) 
+    else
       p[[i]] <- bboxplot.default(y = i, data = data)
+  }
                             
   est <- list(plots = p,
               par1 = par1,

@@ -26,10 +26,11 @@ be ploted.}
 \code{plotvar} plots model variables with confidence/prediction intervals
 }
 \examples{
-fit <- lm(log(Valor_Total) ~ . - lat - lon, centro_2015)
-plotvar(fit, "Area_Total", interval = "confidence")
-plotvar(fit, "Area_Total", "log", interval = "confidence")
-plotvar(fit, "Padrao", interval = "confidence")
-plotvar(fit, "Padrao", "log", interval = "confidence")
+data <- as.data.frame(centro_2015@data)
+fit <- lm(log(valor) ~ ., data = data)
+plotvar(fit, "area_total", interval = "confidence")
+plotvar(fit, "area_total", "log", interval = "confidence")
+plotvar(fit, "padrao", interval = "confidence")
+plotvar(fit, "padrao", "log", interval = "confidence")
 
 }

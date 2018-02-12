@@ -4,16 +4,17 @@
 \alias{graphic_summary}
 \title{Plot data frame graphical summaries}
 \usage{
-graphic_summary(formula, df)
+graphic_summary(formula, data)
 }
 \arguments{
 \item{formula}{a generic formula.}
 
-\item{df}{a dataframe.}
+\item{data}{a dataframe.}
 }
 \description{
 \code{graphical summary} creates standardized boxplots for data frames visualizations.
 }
 \examples{
-graphic_summary(valor ~ ., centro_2015@data)
+data <- as.data.frame(centro_2015@data)
+graphic_summary(valor ~ ., data = data)
 }

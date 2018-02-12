@@ -28,7 +28,7 @@ ploted.}
 \code{plotmod} plots \code{\link{bestfit}} models
 }
 \examples{
-best_fit <- bestfit(Valor_Total ~ . - lat - lon, centro_2015)
+best_fit <- bestfit(valor ~ .,  data = data)
 plotmod(best_fit, interval = "confidence")
 plotmod(best_fit, fit = 2, interval = "confidence")
 

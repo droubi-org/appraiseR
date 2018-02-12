@@ -25,7 +25,7 @@ gerar as  variáveis}
 Simulação com o Método de Monte Carlo
 }
 \examples{
-## Simulacao de Monte Carlo com distribuição uniforme e dependencia total
+## Simulacao de Monte Carlo com distribuiÃ§Ã£o uniforme e dependencia total
 
 set.seed(1)
 ranges <- list(vgv = c(min = 0.9, max = 1.1),
@@ -55,7 +55,7 @@ mean(vpl_unif100$vpl < 0.85*m_unif100) # probability that the VPL is less than 8
 # Or compute the probabilities based on the normal curve with mean and sd equals to that of the simulation.
 pnorm(0.85*m_unif100, mean = m_unif100, sd = std_unif100)
 
-## Simulacao de Monte Carlo com distribuição uniforme e dependencia 50\%
+## Simulacao de Monte Carlo com distribuiÃ§Ã£o uniforme e dependencia 50\%
 
 dependencia50 <- matrix(data = c(1, -.5, -.5, -.5,
                                 -.5, 1, .5, .5,
@@ -70,7 +70,7 @@ hist(vpl_unif50$vpl, freq = FALSE)
 curve(dnorm(x, mean = m_unif50, sd = std_unif50), col = "darkblue", lwd = 2, add = TRUE, yaxt = "n")
 summary(vpl_unif50$vpl)
 
-## Simulacao de Monte Carlo com distribuição uniforme e variáveis totalmente independentes
+## Simulacao de Monte Carlo com distribuiÃ§Ã£o uniforme e variÃ¡veis totalmente independentes
 
 dependencia0 <- diag(4)
 dimnames(dependencia0) <- list(names(ranges), names(ranges))
@@ -83,7 +83,7 @@ hist(vpl_unif$vpl, freq = FALSE)
 curve(dnorm(x, mean = m_unif, sd = std_unif), col = "darkblue", lwd = 2, add = TRUE, yaxt = "n")
 summary(vpl_unif$vpl)
 
-## Simulacao de Monte Carlo com distribuição beta e dependencia 100\%
+## Simulacao de Monte Carlo com distribuiÃ§Ã£o beta e dependencia 100\%
 params <- list(vgv = c(shape1 = 2, shape2 = 2),
                cc = c(shape1 = 2, shape2 = 2),
                bdi_i = c(shape1 = 2, shape2 = 2),

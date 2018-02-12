@@ -10,23 +10,24 @@ bboxplot <- function(y, ...) UseMethod("bboxplot")
 
 #' @param g a grouping variable, usually a factor, for constructing parallel
 #'   boxplots.
-#' @param df a dataframe containing the variables.
+#' @param data a dataframe containing the variables.
 #'
 #' @return A boxplot of the variable \code{y} or the boxplot of the \code{y}
 #'   against \code{g}.
 #'
 #' @examples
-#' bboxplot("valor", df = centro_2015@data)
-#' bboxplot("valor", "padrao", centro_2015@data)
+#' data <- as.data.frame(centro_2015@data)
+#' bboxplot("valor", data = data)
+#' bboxplot("valor", "padrao", data)
 #' @rdname bboxplot
 #' @export
 
-bboxplot.default <- function(y, g, df, ...) {
+bboxplot.default <- function(y, g, data, ...) {
   y <- as.name(y)
   x <- 1
   if (missing(g)) g <- rlang::enquo(x) else g <- as.name(g)
 
-  df %<>% tibble::rowid_to_column()
+  data %<>% tibble::rowid_to_column()
 
   is_outlier <- function(x) {
     low <- stats::quantile(x, 0.25) - 1.5 * stats::IQR(x)
@@ -35,7 +36,7 @@ bboxplot.default <- function(y, g, df, ...) {
   }
 
   p <-
-    df %>%
+    data %>%
     stats::na.omit() %>%
     dplyr::group_by(!!g) %>%
     dplyr::mutate(outlier = ifelse(is_outlier(!!y), rowid, as.numeric(NA))) %>%
@@ -51,24 +52,24 @@ bboxplot.default <- function(y, g, df, ...) {
 #'   the variable y, or of the form y ~ g to produce parallel boxplots for y
 #'   within levels of the grouping variable(s) g, etc., usually factors.
 #' @examples
-#' bboxplot(valor~padrao, centro_2015@data)
-#' bboxplot(~valor, centro_2015@data)
+#' bboxplot(valor~padrao, data)
+#' bboxplot(~valor, data)
 #' @rdname bboxplot
 #' @export
 #'
-bboxplot.formula <- function(formula, df, ...) {
-  response <- attr(stats::terms.formula(formula, data = df),
+bboxplot.formula <- function(formula, data, ...) {
+  response <- attr(stats::terms.formula(formula, data = data),
                    "response")
-  var <- attr(stats::terms.formula(formula, data = df),
+  var <- attr(stats::terms.formula(formula, data = data),
               "term.labels")
 
   if (response == 0) {
-    p <- bboxplot.default(y = var, df = df)
+    p <- bboxplot.default(y = var, data = data)
   } else {
-    response <- colnames(df)[response]
+    response <- colnames(data)[response]
     p <- bboxplot.default(y = response,
                           g = var,
-                          df = df
+                          data = data
     )
   }
   return(p)

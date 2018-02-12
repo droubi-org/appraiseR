@@ -15,5 +15,5 @@ plotdf(formula, data)
 \code{plotdf} creates standardized plots for easy data frames visualizations.
 }
 \examples{
-plotdf(Valor_Total ~ . - lat - lon, centro_2015)
+plotdf(valor ~ . , data)
 }

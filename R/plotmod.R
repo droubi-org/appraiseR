@@ -11,11 +11,12 @@
 #'   be ploted.
 #' @export
 #' @examples
-#' fit <- lm(log(Valor_Total) ~ . - lat - lon, centro_2015)
-#' plotvar(fit, "Area_Total", interval = "confidence")
-#' plotvar(fit, "Area_Total", "log", interval = "confidence")
-#' plotvar(fit, "Padrao", interval = "confidence")
-#' plotvar(fit, "Padrao", "log", interval = "confidence")
+#' data <- as.data.frame(centro_2015@data)
+#' fit <- lm(log(valor) ~ ., data = data)
+#' plotvar(fit, "area_total", interval = "confidence")
+#' plotvar(fit, "area_total", "log", interval = "confidence")
+#' plotvar(fit, "padrao", interval = "confidence")
+#' plotvar(fit, "padrao", "log", interval = "confidence")
 #' 
 plotvar <- function(object, var, func,
                     interval = c("none", "confidence", "prediction"),
@@ -31,32 +32,32 @@ plotvar <- function(object, var, func,
   
   if (is.factor(data[,var])){
     grid <- levels(data[,var])
-    new <- data.frame(grid, lapply(data[setdiff(preds, var)], REATOOLS::centre))
+    new <- data.frame(grid, lapply(data[setdiff(preds, var)], centre))
     names(new)[1] <- var
     Y <- stats::predict.lm(object = z, newdata = new, interval = interval,
                            level = level, ...)
     if (!missing(func)) Y <- inverse(Y, func)
     pred <- data.frame(grid, Y)
     pred_plot <- reshape2::melt(pred, id.var = "grid")
-    p <- ggplot2::ggplot(data = pred_plot, ggplot2::aes(factor(grid), value)) + 
-      ggplot2::geom_boxplot(ggplot2::aes(fill = factor(grid))) +                
-      ggplot2::xlab(var) + ggplot2::ylab(response) +                           
-      ggplot2::theme(legend.position="bottom")   
+    p <- ggplot(data = pred_plot, aes(factor(grid), value)) + 
+      geom_boxplot(aes(fill = factor(grid))) +                
+      xlab(var) + ylab(response) +                           
+      theme(legend.position="bottom")   
   } else {
     grid <- seq(min(data[,var], na.rm = TRUE), max(data[,var], na.rm = TRUE),
                 length = 101)
-    new <- data.frame(grid, lapply(data[setdiff(preds, var)], REATOOLS::centre))
+    new <- data.frame(grid, lapply(data[setdiff(preds, var)], centre))
     names(new)[1] <- var
     Y <- stats::predict.lm(object = z, newdata = new, interval = interval,
                            level = level, ...)
     if (!missing(func)) Y <- inverse(Y, func)
     pred <- data.frame(grid, Y)
-    p <- ggplot2::ggplot(data = pred, ggplot2::aes(x = grid, y = fit)) +
-      ggplot2::geom_line() + 
-      ggplot2::xlab(var) + ggplot2::ylab(response) +                                           
-      ggplot2::theme(legend.position="bottom")                                               
+    p <- ggplot(data = pred, aes(x = grid, y = fit)) +
+      geom_line() + 
+      xlab(var) + ylab(response) +                                           
+      theme(legend.position="bottom")                                               
     if (!missing(interval))
-      p <- p + ggplot2::geom_smooth(ggplot2::aes(ymin = lwr, ymax = upr),
+      p <- p + geom_smooth(aes(ymin = lwr, ymax = upr),
                                     stat = "identity")
   }
   return(p)
@@ -77,7 +78,7 @@ plotvar <- function(object, var, func,
 #'   ploted.
 #' @export
 #' @examples
-#' best_fit <- bestfit(Valor_Total ~ . - lat - lon, centro_2015)
+#' best_fit <- bestfit(valor ~ .,  data = data)
 #' plotmod(best_fit, interval = "confidence")
 #' plotmod(best_fit, fit = 2, interval = "confidence")
 #' 
