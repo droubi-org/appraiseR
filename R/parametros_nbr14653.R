@@ -8,13 +8,15 @@
 #'  
 #'@return a vector containing the amplitudes of the \emph{Y_hat} in \%
 #'  
-#'@export
 #'@examples
-#'fit <- lm(log(Valor_Total) ~ . - lat - lon, data = centro_2015)
-#'aval <- grepl("^aval", rownames(centro_2015))
-#'Y_hat <- predict(object = fit, interval = "confidence", newdata = centro_2015[aval,])
+#'fit <- lm(log(valor) ~ ., data = centro_2015@data)
+#'aval <- centro_2015@data %>% filter(is.na(valor))
+#'Y_hat <- predict(object = fit, interval = "confidence", newdata = aval)
 #'Y_hat <- inverse(Y_hat, "log")
-#'amplitude(Y_hat)
+#'amp <- amplitude(Y_hat)
+#'amp
+#'@rdname parametros_NBR
+#'@export
 amplitude <- function(Y){
   if (is.null(dim(Y))) amp <- NULL else {
     amp <- apply(Y, 1, function (x) 100 * (max(x)-min(x))/x[1])
@@ -33,15 +35,10 @@ amplitude <- function(Y){
 #'  
 #'@return a vector containing the precision degrees of the estimations.
 #'  
-#'@export
 #'@examples
-#'fit <- lm(log(Valor_Total) ~ . - lat - lon, data = centro_2015)
-#'aval <- grepl("^aval", rownames(centro_2015))
-#'Y_hat <- predict(object = fit, interval = "confidence", newdata = centro_2015[aval,])
-#'Y_hat <- inverse(Y_hat, "log")
-#'amp <- amplitude(Y_hat)
 #'g_precisao(amp)
-#'
+#'@rdname parametros_NBR
+#'@export
 g_precisao <- function(amplitude) {
   # Calcula a amplitude do intervalo
   amp <- amplitude
@@ -66,15 +63,10 @@ g_precisao <- function(amplitude) {
 #'@return a vector containing the interval of arbitration according to
 #'  NBR14.653-2.
 #'  
-#'@export
 #'@examples
-#'fit <- lm(log(Valor_Total) ~ . - lat - lon, data = centro_2015)
-#'aval <- grepl("^aval", rownames(centro_2015))
-#'Y_hat <- predict(object = fit, interval = "confidence",
-#'                 newdata = centro_2015[aval,])
-#'Y_hat <- inverse(Y_hat, "log")
 #'campo_arbitrio(Y_hat)
-#' 
+#'@rdname parametros_NBR
+#'@export
 campo_arbitrio <- function(Y){
   ca <- matrix(data = c(0.85*Y[,"fit"], 1.15*Y[,"fit"]), nrow = nrow(Y), 
                dimnames = list(rownames(Y), c("C.A.I.", "C.A.S.")))
@@ -91,15 +83,10 @@ campo_arbitrio <- function(Y){
 #'
 #'@return a vector containing interval evaluation according to NBR14.653-2.
 #'
-#'@export
 #'@examples
-#'fit <- lm(log(Valor_Total) ~ . - lat - lon, data = centro_2015)
-#'aval <- grepl("^aval", rownames(centro_2015))
-#'Y_hat <- predict(object = fit, interval = "confidence",
-#'                 newdata = centro_2015[aval,])
-#'Y_hat <- inverse(Y_hat, "log")
 #'aval_intervalar(Y_hat)
-#' 
+#'@rdname parametros_NBR
+#'@export 
 aval_intervalar <- function(Y){
   if (is.null(dim(Y))) avi <- NULL else {
     ca <- campo_arbitrio(Y)

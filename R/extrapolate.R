@@ -1,10 +1,6 @@
-# RETORNA O VALOR DAS  VARIÁVEIS EXTRAPOLADAS, O PERCENTUAL EXTRAPOLADO EM
-# RELAÇÃO AOS VALORES MÁXIMOS E MÍNIMOS, A FRONTEIRA DE CADA AVALIANDO E O GRAU
-# DE FUNDAMENTAÇÃO DE CADA AVALIAÇÃO SEGUNDO A NBR 14.653-2
-
 #' Extrapolation limits
 #' 
-#' \code{extrapolate} evalues the extrapolation eventually used in the
+#' \code{extrapolate} evaluates the extrapolation eventually used in the
 #' appraisals and returns the precision degree as defined in brazilian standard
 #' NBR-14.653-2 .
 #' 
@@ -13,15 +9,14 @@
 #' @export
 #' @examples
 #' ## newdata inside the data file
-#' fit <- lm(log(Valor_Total) ~ . - lat - lon, centro_2015)
+#' fit <- lm(log(valor) ~ ., centro_2015@data)
 #' extrapolate(object = fit)
 #' 
 #' ## newdata provided as an argument
-#' rows <- grepl("^aval", rownames(centro_2015))
-#' cols <- attr(terms.formula(formula(fit)), "term.labels")
-#' newdata <- subset(centro_2015, subset = rows, select = cols)
-#' newdata$Area_Total[1] <- 1.5*max(centro_2015$Area_Total[1:50])
-#' newdata$Dist_Beira_Mar[2] <- .5*min(centro_2015$Dist_Beira_Mar[1:50])
+#' library(dplyr)
+#' newdata <- centro_2015@data %>% filter(is.na(valor))
+#' newdata$area_total[1] <- 1.5*max(centro_2015$area_total[1:50])
+#' newdata$dist_b_mar[2] <- .5*min(centro_2015$dist_b_mar[1:50])
 #' 
 #' extrapolate(object = fit, newdata = newdata)
 
@@ -32,17 +27,19 @@ extrapolate <- function(object, newdata){
   data <- eval(cl$data, environment(stats::formula(z)))
   param <- parameters(z)
   preds <- param$predictors
+  response <- param$response
+  response <- rlang::enquo(response)
   
   if (missing(newdata))
-    newdata <- base::subset(data, subset = grepl("^aval", rownames(data)),
-                      select = preds)
+    newdata <- data %>% filter(is.na(!!response))
+  newdata %<>% select(!!preds)
   id <- NULL
   id2 <- NULL
   maxs <- plyr::numcolwise(max)(data[preds])
   mins <- plyr::numcolwise(min)(data[preds])
   numeric <- plyr::colwise(is.numeric)(newdata)
   num_preds <- which(numeric == TRUE)
-  newdata_num <- newdata[num_preds]
+  newdata_num <- as.data.frame(newdata[num_preds])
   extr <- plyr::adply(newdata_num, 1,
                       function(x) x - pmin(x, maxs) + x - pmax(x, mins))
   rownames(extr) <- rownames(newdata)

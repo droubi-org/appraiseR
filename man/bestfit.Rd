@@ -68,7 +68,7 @@ best_fit <- update(best_fit, subset = -outliers)
  s <- summary(best_fit, fit = 1, subset = -outliers)
 
 # The latter takes less computational effort, since it only updates the
-#\\code{lm} call of the chosen fit. The former is more precise, since it runs
-#\\code{bestfit} again without the outliers.
+# lm call of the chosen fit. The former is more precise, since it runs
+# bestfit again without the outliers.
 
 }

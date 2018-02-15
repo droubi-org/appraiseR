@@ -12,21 +12,20 @@ extrapolate(object, newdata)
 \item{newdata}{data frame with the real estate data to be appraised}
 }
 \description{
-\code{extrapolate} evalues the extrapolation eventually used in the
+\code{extrapolate} evaluates the extrapolation eventually used in the
 appraisals and returns the precision degree as defined in brazilian standard
 NBR-14.653-2 .
 }
 \examples{
 ## newdata inside the data file
-fit <- lm(log(Valor_Total) ~ . - lat - lon, centro_2015)
+fit <- lm(log(valor) ~ ., centro_2015@data)
 extrapolate(object = fit)
 
 ## newdata provided as an argument
-rows <- grepl("^aval", rownames(centro_2015))
-cols <- attr(terms.formula(formula(fit)), "term.labels")
-newdata <- subset(centro_2015, subset = rows, select = cols)
-newdata$Area_Total[1] <- 1.5*max(centro_2015$Area_Total[1:50])
-newdata$Dist_Beira_Mar[2] <- .5*min(centro_2015$Dist_Beira_Mar[1:50])
+library(dplyr)
+newdata <- centro_2015@data \%>\% filter(is.na(valor))
+newdata$area_total[1] <- 1.5*max(centro_2015$area_total[1:50])
+newdata$dist_b_mar[2] <- .5*min(centro_2015$dist_b_mar[1:50])
 
 extrapolate(object = fit, newdata = newdata)
 }

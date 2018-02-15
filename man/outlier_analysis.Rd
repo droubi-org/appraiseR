@@ -21,5 +21,4 @@ Performs sample outlier analysis according to chosen criteria.
 outlier_analysis(x = trindade, criterion = "30_percent")
 outlier_analysis(x = trindade, criterion = "2_sd")
 outlier_analysis(x = trindade, criterion = "chauvenet")
-setdiff(x, x1)
 }

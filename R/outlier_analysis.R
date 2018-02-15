@@ -9,9 +9,6 @@
 #' outlier_analysis(x = trindade, criterion = "30_percent")
 #' outlier_analysis(x = trindade, criterion = "2_sd")
 #' outlier_analysis(x = trindade, criterion = "chauvenet")
-
-
-#' setdiff(x, x1)
 #' @export
 outlier_analysis <- function(x, criterion = c("30_percent",
                                           "2_sd",

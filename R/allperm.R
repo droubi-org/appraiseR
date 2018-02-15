@@ -5,7 +5,7 @@
 #'   This can be any valid indexing vector (see \link{[.data.frame}) for the
 #'   rows of data or if that is not supplied, a data frame made up of the
 #'   variables used in \code{formula}.
-#' @param select expression, indicating columns to select from a data frame.
+#' @param select a character vector containing selected colnames from a data frame.
 #'   Defaults for all the variables in data. See \link{subset}.
 #' @param transf The transformations to be applied to each parameter
 #' @return A matrix with all the working combinations of supplied

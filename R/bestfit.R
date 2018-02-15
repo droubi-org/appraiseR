@@ -100,8 +100,8 @@ bestfit.default <- function(X, y, t = list(), p = list(), response, ...){
 #'  s <- summary(best_fit, fit = 1, subset = -outliers)
 #'
 #' # The latter takes less computational effort, since it only updates the
-#' #\code{lm} call of the chosen fit. The former is more precise, since it runs
-#' #\code{bestfit} again without the outliers.
+#' # lm call of the chosen fit. The former is more precise, since it runs
+#' # bestfit again without the outliers.
 #'
 #' @rdname bestfit
 #' @export bestfit.formula
