@@ -14,9 +14,12 @@
 #' 
 #' ## newdata provided as an argument
 #' library(dplyr)
-#' newdata <- centro_2015@data %>% filter(is.na(valor))
-#' newdata$area_total[1] <- 1.5*max(centro_2015$area_total[1:50])
-#' newdata$dist_b_mar[2] <- .5*min(centro_2015$dist_b_mar[1:50])
+#' newdata <- 
+#'   centro_2015@data %>% 
+#'   filter(is.na(valor)) %>%
+#'   select(-valor)
+#' newdata$area_total[1] <- 1.5*max(centro_2015@data[complete.cases(centro_2015@data), "area_total"])
+#' newdata$dist_b_mar[2] <- .5*min(centro_2015@data[complete.cases(centro_2015@data), "dist_b_mar"])
 #' 
 #' extrapolate(object = fit, newdata = newdata)
 
@@ -28,11 +31,8 @@ extrapolate <- function(object, newdata){
   param <- parameters(z)
   preds <- param$predictors
   response <- param$response
-  response <- rlang::enquo(response)
-  
-  if (missing(newdata))
-    newdata <- data %>% filter(is.na(!!response))
-  newdata %<>% select(!!preds)
+
+  if (missing(newdata)) newdata <- data[which(is.na(data[, response])), preds]
   id <- NULL
   id2 <- NULL
   maxs <- plyr::numcolwise(max)(data[preds])

@@ -19,6 +19,8 @@
 #' best_fit <- bestfit(valor ~ ., data = centro_2015@data)
 #' p <- predict(best_fit, interval = "confidence")
 #' p
+#' 
+#' predict(best_fit, fit = 2, interval = "confidence")
 #'
 predict.bestfit <- function(object, fit = 1, newdata = object$newdata,
                             interval = c("none", "confidence", "prediction"),

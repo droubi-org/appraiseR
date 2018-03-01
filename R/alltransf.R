@@ -20,7 +20,7 @@
 #' alltransf(centro_2015@data, 1:10, c("valor", "area_total"))
 #'
 #' vars <- colnames(itacorubi_2015@data)
-#' alltransf(itacorubi_2015, select = vars)
+#' alltransf(itacorubi_2015@data, select = vars)
 
 alltransf <- function(data, subset, select = colnames(data),
                       transf = c('rsqrt', 'log', 'sqrt')){

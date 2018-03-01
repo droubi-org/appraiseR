@@ -392,7 +392,7 @@ sensibilidade_vv <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #'
 #' m_beta <- mean(vpl_beta$vpl)
 #' std_beta <- sd(vpl_beta$vpl)
-#' ggplot(as.data.frame(vpl_beta), aes(vpl_beta)) +
+#' ggplot(vpl_beta, aes(vpl)) +
 #'  geom_histogram(aes(y =..density..), col="red", fill="green", alpha=.2) +
 #'   stat_function(
 #'     fun = dnorm,
@@ -423,7 +423,9 @@ vpl_sim <- function(Nsim, ranges, variables, distribution = "uniform",
   } else if (distribution == "beta"){
     qvars <- list()
     for (nam in names(ranges)){
-      qvars[[nam]] <- do.call("qbeta", list(pvars[[nam]], params[[nam]]["shape1"], params[[nam]]["shape2"]))
+      qvars[[nam]] <- do.call("qbeta", list(pvars[[nam]], 
+                                            params[[nam]]["shape1"], 
+                                            params[[nam]]["shape2"]))
       qvars[[nam]] <- (ranges[[nam]]["max"]*variables[[nam]] - ranges[[nam]]["min"]*variables[[nam]])*qvars[[nam]] +
         ranges[[nam]]["min"]*variables[[nam]]
     }

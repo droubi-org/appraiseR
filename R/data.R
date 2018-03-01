@@ -160,7 +160,7 @@ devtools::use_data(centro_2015, centro_13_15, itacorubi_2015,
 #' @format A tibble with 53 rows (50 samples and 3 apartments to be
 #'   appraised) and 7 variables:
 #' \itemize{
-#'   \item valor: price, in brazilian Reals
+#'   \item valor: price, in brazilian Reais
 #'   \item area_total: Total Area, in squared meters
 #'   \item quartos: Rooms
 #'   \item suites: Ensuites
@@ -180,7 +180,7 @@ devtools::use_data(centro_2015, centro_13_15, itacorubi_2015,
 #'
 #' @format A tibble with 90 rows and 11 variables:
 #' \itemize{
-#'    \item valor: price, in brazilian Reals
+#'    \item valor: price, in brazilian Reais
 #'    \item area_total: Total Area, in squared meters
 #'    \item quartos: Rooms
 #'    \item suites: Ensuites
@@ -205,7 +205,7 @@ devtools::use_data(centro_2015, centro_13_15, itacorubi_2015,
 #' @format A tibble with 53 rows (50 samples and 3 apartments to be
 #'  appraised) and 9 variables:
 #' \itemize{
-#'    \item valor: price, in brazilian Reals
+#'    \item valor: price, in brazilian Reais
 #'    \item area_total: Total Area, in squared meters
 #'    \item area_privativa: Private Area, in squared meters
 #'    \item quartos: Rooms
@@ -229,7 +229,7 @@ devtools::use_data(centro_2015, centro_13_15, itacorubi_2015,
 #'
 #' @format A tibble with 249 rows and 7 variables:
 #' \itemize{
-#'    \item valor: price, in brazilian Reals
+#'    \item valor: price, in brazilian Reais
 #'    \item tipo: type of property -
 #'     casa, apartamento, kitinete, terreno, comercial
 #'     (i.e, house, apartament, kitchenette, land, commercial)
@@ -252,7 +252,7 @@ devtools::use_data(centro_2015, centro_13_15, itacorubi_2015,
 #'
 #' @format A tibble with 20 rows and 8 variables:
 #' \itemize{
-#'   \item valor: price, in brazilian Reals
+#'   \item valor: price, in brazilian Reais
 #'   \item area: land area in squared meters
 #'   \item tipo: type: offer or sale -
 #'   venda, oferta (i.e. sale, offer)

@@ -89,7 +89,7 @@ bestfit.default <- function(X, y, t = list(), p = list(), response, ...){
 #'
 #' #There still may be outliers:
 #' out <- car::outlierTest(s$fit)
-#' outliers <- match(names(out$p), rownames(centro_2015))
+#' outliers <- match(names(out$p), rownames(centro_2015@data))
 #'
 #' # There are two ways to handle with them:
 #'
