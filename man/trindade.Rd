@@ -15,6 +15,6 @@
 trindade
 }
 \description{
-A tibble containing a sample of 15 unitary values of apartment sales prices per squared meter.
+A tibble containing a sample of 15 unitary values of apartment sales prices per squared meters.
 }
 \keyword{datasets}

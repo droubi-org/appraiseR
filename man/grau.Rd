@@ -14,6 +14,6 @@ grau(object)
 Reasoning degree based on NBR14.653-2.
 }
 \examples{
-fit <- lm(log(Valor_Total) ~ . - lat - lon, data = centro_2015)
+fit <- lm(log(valor) ~ ., data = centro_2015@data)
 grau(fit)
 }

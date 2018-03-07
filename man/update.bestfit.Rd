@@ -21,12 +21,12 @@ This functions implements the \code{update} method for \link{bestfit} models.
 }
 \examples{
 
-best_fit <- bestfit(Valor_Total ~ . - lat - lon, centro_2015)
+best_fit <- bestfit(valor ~ ., centro_2015@data)
 s <- summary(best_fit)
 out <- car::outlierTest(s$fit)
 
 #update best_fit in order to exclude the outlier found (AP_31)
-outliers <- match(names(out$p), rownames(centro_2015))
+outliers <- match(names(out$p), rownames(centro_2015@data))
 update(best_fit, subset = -outliers)
 
 }

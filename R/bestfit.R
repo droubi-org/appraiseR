@@ -131,8 +131,7 @@ bestfit.formula <- function(formula, data, subset,
   p <- allperm(data = data, subset = subset,
                          select = parameters, transf = transf)
 
-  newdata <- base::subset(data, subset = grepl("^aval", rownames(data)),
-                          select = colnames(data) %in% parameters)
+  newdata <-  data[which(is.na(data[, response])), ]
 
   z <- bestfit.default(X, y, t, p, response)
 

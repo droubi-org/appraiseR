@@ -57,7 +57,7 @@ s <- summary(best_fit)
 
 #There still may be outliers:
 out <- car::outlierTest(s$fit)
-outliers <- match(names(out$p), rownames(centro_2015))
+outliers <- match(names(out$p), rownames(centro_2015@data))
 
 # There are two ways to handle with them:
 

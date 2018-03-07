@@ -94,7 +94,7 @@ vpl_beta <- vpl_sim(Nsim, ranges = ranges, variables = variables, distribution =
 
 m_beta <- mean(vpl_beta$vpl)
 std_beta <- sd(vpl_beta$vpl)
-ggplot(as.data.frame(vpl_beta), aes(vpl_beta)) +
+ggplot(vpl_beta, aes(vpl)) +
  geom_histogram(aes(y =..density..), col="red", fill="green", alpha=.2) +
   stat_function(
     fun = dnorm,

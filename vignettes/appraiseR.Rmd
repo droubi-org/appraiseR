@@ -1,0 +1,157 @@
+---
+title: "appraiseR"
+author: "Luiz Fernando Palin Droubi"
+date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=FALSE, message = FALSE, warning = FALSE, 
+                      dev = "png", dpi = 600, fig.height = 4.5, fig.width = 7,
+                      fig.path = "images/", fig.align = "center", out.width = "90%")
+library(appraiseR)
+library(leaflet)
+help_console <- function(topic, format=c("text", "html", "latex", "Rd"),
+                         lines=NULL, before=NULL, after=NULL) {  
+  format=match.arg(format)
+  if (!is.character(topic)) topic <- deparse(substitute(topic))
+  helpfile = utils:::.getHelpFile(help(topic))
+
+  hs <- capture.output(switch(format, 
+                              text=tools:::Rd2txt(helpfile),
+                              html=tools:::Rd2HTML(helpfile),
+                              latex=tools:::Rd2latex(helpfile),
+                              Rd=tools:::prepare_Rd(helpfile)
+                              )
+                      )
+  if(!is.null(lines)) hs <- hs[lines]
+  hs <- c(before, hs, after)
+  cat(hs, sep="\n")
+  invisible(hs)
+}
+```
+
+## Data
+
+`appraiseR` comes with built-in `SpatialPointsDataFrames` such as `centro_2015`, `centro_13_15`, `itacorubi_2015`, `trivelloni_2005` and other `dataframes` like `loteamento`, `renda`, `canasvieiras_97`, `trindade_ap`, `terrenos_praia`, `trindade` and `jungles`.
+
+For more information of this available datasets, one can simply use the `help` command in `R`:
+
+```{r help, echo=TRUE, eval=FALSE}
+help(centro_2015)
+```
+
+```{r echo=FALSE}
+help_console(centro_2015, format = "text")
+```
+
+
+## Objective
+
+Real Estate Appraisals in Brazil are standardized in NBR 14.653-2. The standard recommended procedure is to build a multiple linear regression analysis. Transformation of the parameters to obtain a better fit is usual, although appraisers are not familiar with box-cox or other methods to find best transformations.
+
+The main purpose of `appraiseR` is to help engineers to find transformations of the parameters in the model in order to obtain the best fit that satisfies the recomendations stablished in NBR 14.653-2.
+
+## Outlier analysis
+
+Outlier analysis by several criteria can be achieved trough the `outlier_analysis` function:
+
+```{r outliers, message=TRUE}
+outlier_analysis(x = trindade, criterion = "30_percent")
+outlier_analysis(x = trindade, criterion = "2_sd")
+outlier_analysis(x = trindade, criterion = "chauvenet")
+```
+ 
+
+## Running bestfit
+
+`appraiseR` package includes both functions to help the appraiser to find best fits through the transformation of the parameters in the model (bestfit()) and functions to help the appraiser to verifie that the found fit satisfies the criteria of the brazilian standard NBR 14.653-2.
+
+The first thing to be done is try to find the best model with bestfit function, as follows:
+
+```{r best_fit}
+library(appraiseR)
+data <- as.data.frame(centro_2015@data)
+best_fit <- bestfit(valor~., data)
+```
+
+`bestfit` automatically fits a series of transformations in the parameteres and combine them in several models. These models are later ordered  by the adjusted R^2^ criteria. By default, `bestfit` uses three transformations functions, equivalent to the use of the box-cox method with $-0.5 \leq \lambda \leq +0.5$. This can be changed with the `transf` argument.
+
+If printed, a bestfit object shows a table of the best 10 models found according to the criteria mentioned above:
+
+```{r print}
+print(best_fit)
+```
+
+The number of printed lines may be changed in the print method, if desired:
+
+```{r print2, eval = FALSE}
+print(best_fit, n = 20)
+```
+
+The summary method is also available for bestfit objects. The user may find helpful not to use the first model in the table, so in the summary method is possible to choose the desired fit to be used with the fit argument, as follows:
+
+```{r summary}
+s <- summary(best_fit, fit = 1)
+s
+```
+
+One can note that the summary method performs a linear model with the chosen fit to give the user the possibility to verifie the main diagnostics data of the model.
+
+## Updating
+
+You can easily update your calls to `bestfit`. For this, a update method is made available specific for bestfit objects.
+
+Despite the effort made to find the best transformations there is a possibility that some outliers still be present in the model.
+The user may search for them with very usual R functions, as `outlierTest` available in the `car` package:
+
+```{r outlier}
+car::outlierTest(s$fit)
+```
+
+With the results of the outlier test, one can update the `bestfit` call as follows:
+
+```{r summary2}
+best_fit <- update(best_fit, subset = -31)
+summary(best_fit)
+```
+
+One can note that without the outlier, the model now perfectly satisfies the main requirements of NBR 14.653-2.
+
+## Plots
+
+There are two plot functions in `appraiseR`: `plotdf` and `plotmod`. Before any fitting model activity, `plotdf` may be used to investigate outliers with the boxplot of the parameters of the model.
+
+```{r plotdf, fig.cap = "plotdf output."}
+plotdf(valor~., data)
+```
+
+Then, once the models are fitted, `plotmod` plots regressors against the response variable, with confidence or prediction intervals:
+
+```{r plotmod, fig.cap = "plotmod output."}
+pl <- plotmod(best_fit, interval = "confidence")
+pl
+```
+
+With these plots one verifies if the variables in the model works as predicted by the user.
+
+A third visualization tool in appraiseR is the `gen_map` function. 
+
+```{r map}
+gen_map(centro_2015)
+```
+
+
+## Predictions
+
+`predict` method is also available for `bestfit` objects. `predict` automatically searchs for newdata in the data frame of the model. `predict` does this searching for `NA` values in the response variable. If there are such data, then `predict` will automatically uses this values as the newdata option. Else, newdata must be explicitly provided to `predict.bestfit`, the same way it is done with `predict.lm`.
+
+```{r predict}
+p <- predict(best_fit, interval = "confidence")
+p
+```
+

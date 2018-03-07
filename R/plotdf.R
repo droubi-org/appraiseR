@@ -27,7 +27,7 @@ plotdf <- function(formula, data){
     if (is.character(data[, i]) | is.factor(data[, i])) 
       p[[i]] <- bboxplot.default(y = response, g = i, data = data) 
     else
-      p[[i]] <- bboxplot.default(y = i, data = data)
+      p[[i]] <- bboxplot.default(y = i, data = data) + guides(fill = "none")
   }
                             
   est <- list(plots = p,

@@ -6,7 +6,7 @@
 \title{Prices of 249 Florianopolis' Real Estate}
 \format{A tibble with 249 rows and 7 variables:
 \itemize{
-   \item valor: price, in brazilian Reals
+   \item valor: price, in brazilian Reais
    \item tipo: type of property -
     casa, apartamento, kitinete, terreno, comercial
     (i.e, house, apartament, kitchenette, land, commercial)

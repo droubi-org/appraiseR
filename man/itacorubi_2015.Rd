@@ -7,7 +7,7 @@
 \format{A tibble with 53 rows (50 samples and 3 apartments to be
  appraised) and 9 variables:
 \itemize{
-   \item valor: price, in brazilian Reals
+   \item valor: price, in brazilian Reais
    \item area_total: Total Area, in squared meters
    \item area_privativa: Private Area, in squared meters
    \item quartos: Rooms

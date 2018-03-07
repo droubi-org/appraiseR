@@ -6,7 +6,7 @@
 \title{Land division data}
 \format{A tibble with 20 rows and 8 variables:
 \itemize{
-  \item valor: price, in brazilian Reals
+  \item valor: price, in brazilian Reais
   \item area: land area in squared meters
   \item tipo: type: offer or sale -
   venda, oferta (i.e. sale, offer)

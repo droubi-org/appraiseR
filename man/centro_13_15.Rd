@@ -6,7 +6,7 @@
 \title{Prices of Florianopolis' downtown apartaments in 2013 and 2015}
 \format{A tibble with 90 rows and 11 variables:
 \itemize{
-   \item valor: price, in brazilian Reals
+   \item valor: price, in brazilian Reais
    \item area_total: Total Area, in squared meters
    \item quartos: Rooms
    \item suites: Ensuites

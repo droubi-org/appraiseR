@@ -15,5 +15,6 @@ plotdf(formula, data)
 \code{plotdf} creates standardized plots for easy data frames visualizations.
 }
 \examples{
+data <- as.data.frame(centro_2015@data)
 plotdf(valor ~ . , data)
 }
