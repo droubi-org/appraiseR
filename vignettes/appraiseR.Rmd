@@ -4,7 +4,7 @@ author: "Luiz Fernando Palin Droubi"
 date: "`r format(Sys.Date(), '%d/%m/%Y')`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{appraiseR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -12,43 +12,47 @@ vignette: >
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(cache=FALSE, message = FALSE, warning = FALSE, 
                       dev = "png", dpi = 600, fig.height = 4.5, fig.width = 7,
-                      fig.path = "images/", fig.align = "center", out.width = "90%")
+                      fig.path = "./", fig.align = "center", out.width = "90%")
 library(appraiseR)
 library(leaflet)
-help_console <- function(topic, format=c("text", "html", "latex", "Rd"),
-                         lines=NULL, before=NULL, after=NULL) {  
-  format=match.arg(format)
-  if (!is.character(topic)) topic <- deparse(substitute(topic))
-  helpfile = utils:::.getHelpFile(help(topic))
-
-  hs <- capture.output(switch(format, 
-                              text=tools:::Rd2txt(helpfile),
-                              html=tools:::Rd2HTML(helpfile),
-                              latex=tools:::Rd2latex(helpfile),
-                              Rd=tools:::prepare_Rd(helpfile)
-                              )
-                      )
-  if(!is.null(lines)) hs <- hs[lines]
-  hs <- c(before, hs, after)
-  cat(hs, sep="\n")
-  invisible(hs)
-}
 ```
 
 ## Data
 
 `appraiseR` comes with built-in `SpatialPointsDataFrames` such as `centro_2015`, `centro_13_15`, `itacorubi_2015`, `trivelloni_2005` and other `dataframes` like `loteamento`, `renda`, `canasvieiras_97`, `trindade_ap`, `terrenos_praia`, `trindade` and `jungles`.
 
-For more information of this available datasets, one can simply use the `help` command in `R`:
+More information on the available datasets can be find using the `help` command in `R`:
 
 ```{r help, echo=TRUE, eval=FALSE}
 help(centro_2015)
 ```
 
-```{r echo=FALSE}
-help_console(centro_2015, format = "text")
-```
 
+**Prices of 50 Florianopolis' downtown apartaments**
+
+**Description**
+
+A SpatialPointsDataFrame containing a sample of 50 apartaments with prices and other attributes in Florianopolis' downtown
+
+**Usage**
+
+`centro_2015`
+
+**Format**
+
+A tibble with 53 rows (50 samples and 3 apartments to be appraised) and 7 variables:
+
+* valor: price, in brazilian Reais
+* area_total: Total Area, in squared meters
+* quartos: Rooms
+* suites: Ensuites
+* garagens: Garages
+* dist_b_mar: Distance to the beach
+* padrao: Building Standard - baixo, medio, alto (i.e. low, normal, high)
+
+**Source**
+
+**HOCHHEIM, Norberto**. *Engenharia de avaliacoes imobiliarias: Modulo Basico*. Florianopolis: IBAPE/SC, 2015, p.21-22
 
 ## Objective
 
@@ -133,7 +137,7 @@ plotdf(valor~., data)
 Then, once the models are fitted, `plotmod` plots regressors against the response variable, with confidence or prediction intervals:
 
 ```{r plotmod, fig.cap = "plotmod output."}
-pl <- plotmod(best_fit, interval = "confidence")
+pl <- plotmod(best_fit, interval = "confidence", level = 0.80)
 pl
 ```
 
@@ -151,7 +155,7 @@ gen_map(centro_2015)
 `predict` method is also available for `bestfit` objects. `predict` automatically searchs for newdata in the data frame of the model. `predict` does this searching for `NA` values in the response variable. If there are such data, then `predict` will automatically uses this values as the newdata option. Else, newdata must be explicitly provided to `predict.bestfit`, the same way it is done with `predict.lm`.
 
 ```{r predict}
-p <- predict(best_fit, interval = "confidence")
+p <- predict(best_fit, interval = "confidence", level = 0.80)
 p
 ```
 
