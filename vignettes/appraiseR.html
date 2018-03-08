@@ -79,6 +79,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><code>appraiseR</code> comes with built-in <code>SpatialPointsDataFrames</code> such as <code>centro_2015</code>, <code>centro_13_15</code>, <code>itacorubi_2015</code>, <code>trivelloni_2005</code> and other <code>dataframes</code> like <code>loteamento</code>, <code>renda</code>, <code>canasvieiras_97</code>, <code>trindade_ap</code>, <code>terrenos_praia</code>, <code>trindade</code> and <code>jungles</code>.</p>
 <p>More information on the available datasets can be find using the <code>help</code> command in <code>R</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(centro_<span class="dv">2015</span>)</code></pre></div>
+<p><strong>Prices of 50 Florianopolis’ downtown apartaments</strong></p>
+<p><strong>Description</strong></p>
+<p>A SpatialPointsDataFrame containing a sample of 50 apartaments with prices and other attributes in Florianopolis’ downtown</p>
+<p><strong>Usage</strong></p>
+<p><code>centro_2015</code></p>
+<p><strong>Format</strong></p>
+<p>A tibble with 53 rows (50 samples and 3 apartments to be appraised) and 7 variables:</p>
+<ul>
+<li>valor: price, in brazilian Reais</li>
+<li>area_total: Total Area, in squared meters</li>
+<li>quartos: Rooms</li>
+<li>suites: Ensuites</li>
+<li>garagens: Garages</li>
+<li>dist_b_mar: Distance to the beach</li>
+<li>padrao: Building Standard - baixo, medio, alto (i.e. low, normal, high)</li>
+</ul>
+<p><strong>Source</strong></p>
+<p><strong>HOCHHEIM, Norberto</strong>. <em>Engenharia de avaliacoes imobiliarias: Modulo Basico</em>. Florianopolis: IBAPE/SC, 2015, p.21-22</p>
 </div>
 <div id="objective" class="section level2">
 <h2>Objective</h2>
