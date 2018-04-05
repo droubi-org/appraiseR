@@ -13,6 +13,7 @@ License: MIT + file LICENSE
 LazyData: true
 Imports: 
     dplyr,
+    devtools,
     tibble,
     readr,
     forcats,
