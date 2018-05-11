@@ -3,12 +3,16 @@
 \name{plotmod}
 \alias{plotmod}
 \alias{plotmod.bestfit}
+\alias{plotmod.lm}
 \title{Plot bestfit models}
 \usage{
 plotmod(object, ...)
 
 \method{plotmod}{bestfit}(object, fit = 1, interval = c("none",
   "confidence", "prediction"), level = 0.8, ...)
+
+\method{plotmod}{lm}(object, interval = c("none", "confidence", "prediction"),
+  level = 0.8, func = "identity", ...)
 }
 \arguments{
 \item{object}{Object of class \code{\link{bestfit}}}
@@ -31,5 +35,9 @@ ploted.}
 best_fit <- bestfit(valor ~ .,  data = data)
 plotmod(best_fit, interval = "confidence")
 plotmod(best_fit, fit = 2, interval = "confidence")
+
+fit <- lm(log(valor) ~ ., data = data)
+plotmod(fit, interval = "confidence")
+plotmod(fit, interval = "confidence", func = "log")
 
 }

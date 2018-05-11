@@ -182,7 +182,7 @@ parameters.lm <- function(object, ...) {
                         )
     x <- sapply(vars, grepl, termsLabels)
     preds <- vars[apply(x, 2, any)]
-    resp <- colnames(data)[attr(z$terms, "response")]
+    resp <- vars[!apply(x, 2, any)]
 
     param <-
       list(parameters = c(resp, preds),

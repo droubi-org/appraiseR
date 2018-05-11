@@ -4,13 +4,11 @@
 \alias{plotvar}
 \title{Plot model predictors against the response variable with intervals}
 \usage{
-plotvar(object, var, func, interval = c("none", "confidence", "prediction"),
-  level = 0.8, ...)
+plotvar(object, variable, func, interval = c("none", "confidence",
+  "prediction"), level = 0.8, ...)
 }
 \arguments{
 \item{object}{object of class lm}
-
-\item{var}{variable to be plotted against response variable}
 
 \item{func}{function used to transform the response (optional)}
 
@@ -21,12 +19,14 @@ be ploted.}
 be ploted.}
 
 \item{\dots}{further arguments passed to predict.lm.}
+
+\item{var}{variable to be plotted against response variable}
 }
 \description{
 \code{plotvar} plots model variables with confidence/prediction intervals
 }
 \examples{
-data <- as.data.frame(centro_2015@data)
+data <- centro_2015@data
 fit <- lm(log(valor) ~ ., data = data)
 plotvar(fit, "area_total", interval = "confidence")
 plotvar(fit, "area_total", "log", interval = "confidence")
