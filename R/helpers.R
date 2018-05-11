@@ -243,3 +243,12 @@ new_data <- function(object) {
     dplyr::select(parameters)
   aval
 }
+#' @export
+brformat <- function(x, decimal.mark = ",", big.mark = ".", digits = 2, nsmall = 2, scientific = FALSE, ...) {
+  format(x, decimal.mark = decimal.mark, big.mark = big.mark, digits = digits, 
+         nsmall = nsmall, scientific = scientific, ...)
+}
+#' @export
+reais <- function(prefix = "R$", ...) {
+  function(x) paste(prefix, brformat(x, ...), sep = "")
+}

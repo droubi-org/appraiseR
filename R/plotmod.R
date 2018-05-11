@@ -43,7 +43,7 @@ plotvar <- function(object, variable, func,
     p <- ggplot(data = pred_plot, aes(factor(grid), value)) + 
       geom_boxplot(aes(fill = factor(grid))) +                
       xlab(variable) + ylab(response) +                           
-      theme(legend.position="bottom")   
+      theme(legend.position="bottom")
   } else {
     grid <- seq(min(df[, variable], na.rm = TRUE), max(df[, variable], na.rm = TRUE),
                 length = 101)
@@ -56,7 +56,7 @@ plotvar <- function(object, variable, func,
     p <- ggplot(data = pred, aes(x = grid, y = fit)) +
       geom_line() + 
       xlab(variable) + ylab(response) +                                           
-      theme(legend.position="bottom")                                               
+      theme(legend.position="bottom")
     if (interval != "none") {
       p <- p + geom_ribbon(aes(ymin = lwr, ymax = upr, colour = "grey", alpha = 0.5),
                            stat = "identity") +                                           
