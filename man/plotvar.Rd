@@ -5,10 +5,12 @@
 \title{Plot model predictors against the response variable with intervals}
 \usage{
 plotvar(object, variable, func, interval = c("none", "confidence",
-  "prediction"), level = 0.8, ...)
+  "prediction"), level = 0.8, local, ...)
 }
 \arguments{
 \item{object}{object of class lm}
+
+\item{variable}{variable to be plotted against response variable}
 
 \item{func}{function used to transform the response (optional)}
 
@@ -18,9 +20,9 @@ be ploted.}
 \item{level}{Tolerance/confidence level (provided to predict.lm) to
 be ploted.}
 
-\item{\dots}{further arguments passed to predict.lm.}
+\item{local}{Data Frame to be used for calculate the estimates (defaults for center of each variable).}
 
-\item{var}{variable to be plotted against response variable}
+\item{\dots}{further arguments passed to predict.lm.}
 }
 \description{
 \code{plotvar} plots model variables with confidence/prediction intervals
@@ -30,7 +32,8 @@ data <- centro_2015@data
 fit <- lm(log(valor) ~ ., data = data)
 plotvar(fit, "area_total", interval = "confidence")
 plotvar(fit, "area_total", "log", interval = "confidence")
+plotvar(fit, "area_total", interval = "confidence", 
+        local = list(area_total = 205, quartos = 3, suites = 1, garagens = 2, dist_b_mar = 250, padrao = "medio"))
 plotvar(fit, "padrao", interval = "confidence")
 plotvar(fit, "padrao", "log", interval = "confidence")
-
 }

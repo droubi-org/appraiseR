@@ -9,10 +9,10 @@
 plotmod(object, ...)
 
 \method{plotmod}{bestfit}(object, fit = 1, interval = c("none",
-  "confidence", "prediction"), level = 0.8, ...)
+  "confidence", "prediction"), level = 0.8, local, ...)
 
 \method{plotmod}{lm}(object, interval = c("none", "confidence", "prediction"),
-  level = 0.8, func = "identity", ...)
+  level = 0.8, func = "identity", local, ...)
 }
 \arguments{
 \item{object}{Object of class \code{\link{bestfit}}}
@@ -35,9 +35,15 @@ ploted.}
 best_fit <- bestfit(valor ~ .,  data = data)
 plotmod(best_fit, interval = "confidence")
 plotmod(best_fit, fit = 2, interval = "confidence")
+plotmod(best_fit, interval = "confidence", 
+        local = list(area_total = 205, quartos = 3, suites = 1, garagens = 2, dist_b_mar = 250, padrao = "medio"))
 
 fit <- lm(log(valor) ~ ., data = data)
 plotmod(fit, interval = "confidence")
 plotmod(fit, interval = "confidence", func = "log")
+plotmod(fit, interval = "confidence", 
+        local = list(area_total = 205, quartos = 3, suites = 1, garagens = 2, dist_b_mar = 250, padrao = "medio"))
+plotmod(fit, interval = "confidence", func = "log",
+        local = list(area_total = 205, quartos = 3, suites = 1, garagens = 2, dist_b_mar = 250, padrao = "medio"))
 
 }
