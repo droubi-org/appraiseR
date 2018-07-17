@@ -5,3 +5,4 @@
 *.xlsx
 appraiseR.Rproj
 env.RData
+docs/*
