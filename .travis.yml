@@ -16,4 +16,4 @@ addons:
   apt:
     packages:
     - libgdal1-dev 
-    - libproj-dev8
+    - libproj-dev
