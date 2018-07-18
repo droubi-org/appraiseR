@@ -14,37 +14,37 @@ LazyData: true
 Imports: 
     dplyr,
     devtools,
-    tibble,
-    readr,
-    forcats,
-    sp,
     ggplot2,
     gtools,
+    forcats,
     magrittr,
     miscTools,
     plyr,
+    proj4,
     pryr,
     RcppEigen,
+    readr,
     reshape2,
     rlang,
     scales,
+    sp,
     stats,
-    proj4
+    tibble
 Suggests: 
     car,
     DT,
     ggvis,
+    gridExtra,
+    knitr,
     latex2exp,
     leaflet,
     lmtest,
+    pkgdown,
     plotmo,
     raster,
+    rmarkdown,
     shiny,
     sp,
-    testthat,
-    gridExtra,
-    knitr,
-    rmarkdown,
-    pkgdown
+    testthat
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr

@@ -11,3 +11,9 @@ deploy:
   local-dir: docs
   on:
     branch: master
+    
+addons:
+  apt:
+    packages:
+    - libgdal1-dev 
+    - libproj-dev8
