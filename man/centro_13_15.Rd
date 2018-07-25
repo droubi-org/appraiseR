@@ -20,7 +20,7 @@
     sim, nao (TRUE, FALSE)
 }}
 \source{
-\strong{IBAPE/SC}. \emph{Curso de Engenharia de Avaliacoes Imobiliarias – modulo basico}.
+\strong{IBAPE/SC}. \emph{Curso de Engenharia de Avaliacoes Imobiliarias: modulo basico}.
 Florianopolis, maio/2015
 }
 \usage{

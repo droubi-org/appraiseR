@@ -11,6 +11,14 @@ magrittr::`%<>%`
 #' @export
 magrittr::`%$%`
 
+#' @importFrom stats pnorm
+#' @export
+stats::pnorm
+
+#' @importFrom stats predict
+#' @export
+stats::predict
+
 #' Parent Function: Power of a number.
 #'
 #' This is an internal function to generate another ones which will be
@@ -243,11 +251,25 @@ new_data <- function(object) {
     dplyr::select(parameters)
   aval
 }
+#' Wrapper around format
+#' 
+#' This function is only a wrapper around \link{format} function that uses standard 
+#' brazillian formats by default
+#' 
+#' @param x a number to be formatted by \code{format}
 #' @export
-brformat <- function(x, decimal.mark = ",", big.mark = ".", digits = 2, nsmall = 2, scientific = FALSE, ...) {
+brformat <- function(x, decimal.mark = ",", big.mark = ".", digits = 2, 
+                     nsmall = 2, scientific = FALSE, ...) {
   format(x, decimal.mark = decimal.mark, big.mark = big.mark, digits = digits, 
          nsmall = nsmall, scientific = scientific, ...)
 }
+#' Wrapper around brformat
+#' 
+#' This is a wrapper around \link{brformat}.
+#' 
+#' @param prefix currency units. Defaults for brazilian reais.
+#' @param \ldots further arguments to be passed to \link{brformat}.
+#' 
 #' @export
 reais <- function(prefix = "R$", ...) {
   function(x) paste(prefix, brformat(x, ...), sep = "")

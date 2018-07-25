@@ -13,12 +13,14 @@
   \item condominio: condominium fee
 }}
 \source{
-\strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes I}. Florianopolis: IBAPE/SC, 2005, p.99
+\strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes I}. 
+Florianopolis: IBAPE/SC, 2005, p.99
 }
 \usage{
 renda
 }
 \description{
-A tibble containing a sample of 7 apartments to be used to appraise by the the Income Method.
+A tibble containing a sample of 7 apartments to be used to appraise by the 
+Income Method.
 }
 \keyword{datasets}

@@ -18,7 +18,7 @@
 #'   
 #' @export
 #' @examples
-#' best_fit <- bestfit(Valor_Total ~ . - lat - lon, data = centro_2015)
+#' best_fit <- bestfit(valor ~ ., data = centro_2015@data)
 #' summary(best_fit)
 #' summary(best_fit, fit = 2)
 summary.bestfit <- function(object, fit = 1, subset, ...){

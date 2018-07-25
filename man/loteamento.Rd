@@ -19,13 +19,14 @@
   seco, pantanoso (i.e. dry, marshy)
 }}
 \source{
-\strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes I}. Florianopolis: IBAPE/SC, 2005, p.74
+\strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes I}. 
+Florianopolis: IBAPE/SC, 2005, p.74
 }
 \usage{
 loteamento
 }
 \description{
-A tibble containing a sample of 20 plots in subdivision in Florianopolis. Paradigm situation:
-dry, flat, 15m front width and 30~60m length.
+A tibble containing a sample of 20 plots in subdivision in Florianopolis. 
+Paradigm situation: dry, flat, 15m front width and 30~60m length.
 }
 \keyword{datasets}

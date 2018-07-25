@@ -19,8 +19,10 @@
     baixo, medio, alto (i.e. low, normal, high)
 }}
 \source{
-\strong{Trivelloni, Carlos Alberto Peruzzo}. \emph{Metodo para determinacao do valor da localizacao
- com uso de tecnicas inferenciais e geoestatisticas na avaliacao em massa de imoveis}. Florianopolis, 2005.
+\strong{Trivelloni, Carlos Alberto Peruzzo}. 
+\emph{Metodo para determinacao do valor da localizacao com uso de tecnicas 
+inferenciais e geoestatisticas na avaliacao em massa de imoveis}. 
+Florianopolis, 2005.
 }
 \usage{
 trivelloni_2005

@@ -5,6 +5,7 @@
 #' @param bdi_c Constructors Budget Difference Income
 #' @param bdi_i Developers Budget Difference Income
 #' @param cor Brokerage fee
+#' @rdname involutivo
 #' @export
 involutivo_estatico <- function(vgv, cc, bdi_c, bdi_i, cor){
   valor_terreno <- vgv - cc - bdi_c*cc - bdi_i*vgv - cor*vgv
@@ -19,6 +20,7 @@ involutivo_estatico <- function(vgv, cc, bdi_c, bdi_i, cor){
 #' @return the maximum building area
 #' @examples
 #' ac <- AREA_CONSTRUIDA(630, 2.5, 5)
+#' @rdname involutivo
 #' @export
 
 AREA_CONSTRUIDA <- function(area_terreno, IA, np){
@@ -34,6 +36,7 @@ AREA_CONSTRUIDA <- function(area_terreno, IA, np){
 #' @return The Overall Sales Value
 #' @examples
 #' vgv <- VGV(20*94.5, 7000)
+#' @rdname involutivo
 #' @export
 
 VGV <- function(area_construida, valor_unitario){
@@ -44,9 +47,7 @@ VGV <- function(area_construida, valor_unitario){
 
 #' Investment cash flow
 #'
-#' @param cc construction cost
 #' @param wc vector of weights of the total constructions costs over periods
-#' @param bdi_c Constructors Budget Difference Income
 #' @param index a vector with the periods in which are made the expenses
 #' @return a vector containing the expected investment cash flow
 #' @examples
@@ -54,6 +55,7 @@ VGV <- function(area_construida, valor_unitario){
 #' bdi_c <- 31.46/100
 #' cc <-  3523496.76
 #' fci_provavel <- FCI(cc = cc, wc = wc, bdi_c = bdi_c)
+#' @rdname involutivo
 #' @export
 
 FCI <- function(cc, wc, bdi_c, index = seq(0, length(wc) - 1)){
@@ -64,12 +66,12 @@ FCI <- function(cc, wc, bdi_c, index = seq(0, length(wc) - 1)){
 
 #' Sales Cash Flow
 #'
-#' @param vgv overall selling value
-#' @param w vector of weights of the total expected sales over periods
+#' @param wv vector of weights of the total expected sales over periods
 #' @return a vector containing the expected sales cash flow
 #' @examples
 #' wv <- c(0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2)/20
 #' fcv_provavel <- FCV(vgv = vgv, wv = wv)
+#' @rdname involutivo
 #' @export
 
 FCV <- function(vgv, wv, index = seq(0, length(wv) - 1)){
@@ -82,13 +84,12 @@ FCV <- function(vgv, wv, index = seq(0, length(wv) - 1)){
 #'
 #' @param fcv the expected sales cash flow
 #' @param fci the expected investment cash flow
-#' @param bdi_i Developers Budget Difference Income
-#' @param cor Brokerage fee
 #' @return the expected Net Cash Flow
 #' @examples
 #' bdi_i <- 23.5223/100
 #' cor <- 5/100
 #' fcl_provavel <- FCL(fcv_provavel, fci_provavel, bdi_i = bdi_i, cor = cor)
+#' @rdname involutivo
 #' @export
 
 FCL <- function(fcv, fci, bdi_i, cor){
@@ -105,6 +106,7 @@ FCL <- function(fcv, fci, bdi_i, cor){
 #' @examples
 #' tma <- 1.91/100
 #' FC(fcv_provavel, fci_provavel, bdi_i = bdi_i, cor = cor, tma = tma)
+#' @rdname involutivo
 #' @export
 
 FC <- function(fcv, fci, bdi_i, cor, tma){
@@ -126,6 +128,7 @@ FC <- function(fcv, fci, bdi_i, cor, tma){
 #' @return the net present value of the project
 #' @examples
 #' vpl_provavel <- VPL(fcl_provavel, tma = tma)
+#' @rdname involutivo
 #' @export
 
 VPL <- function(fcl, tma){
@@ -140,6 +143,8 @@ VPL <- function(fcl, tma){
 
 #' Sensibilidade aa TMA
 #'
+#' @param range range of variation
+#'
 #' @examples
 #' range_tma <- c(1.2, 2.6)/100
 #' s_tma <- sensibilidade_tma(range_tma, fcl_provavel)
@@ -149,8 +154,9 @@ VPL <- function(fcl, tma){
 #' ggplot(s_tma, aes(x = TMA, y = VPL)) +
 #'   geom_line() + geom_point() +
 #'   scale_x_continuous(labels = scales::percent) +
-#'   scale_y_continuous(labels = scales::dollar) +
+#'   scale_y_continuous(labels = reais()) +
 #'   labs(title = "Sensibilidade à TMA")
+#' @rdname involutivo
 #' @export
 
 sensibilidade_tma <- function(range, fcl){
@@ -177,9 +183,10 @@ sensibilidade_tma <- function(range, fcl){
 #'
 #' ggplot(s_custo, aes(x = CC, y = VPL)) +
 #'   geom_line() + geom_point() +
-#'   scale_x_continuous(labels = scales::dollar) +
-#'   scale_y_continuous(labels = scales::dollar) +
+#'   scale_x_continuous(labels = reais()) +
+#'   scale_y_continuous(labels = reais()) +
 #'   labs(title = "Sensibilidade à variação dos Custos de Construção")
+#' @rdname involutivo
 #' @export
 
 sensibilidade_custo <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
@@ -205,11 +212,12 @@ sensibilidade_custo <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #'                                bdi_i = bdi_i, bdi_c = bdi_c,
 #'                                cor = cor, tma = tma)
 #' s_vgv
-#' ggplot(s_venda, aes(x = Vendas, y = VPL)) +
+#' ggplot(s_vgv, aes(x = Vendas, y = VPL)) +
 #'   geom_point() + geom_line() +
-#'   scale_x_continuous(labels = scales::dollar) +
-#'   scale_y_continuous(labels = scales::dollar) +
+#'   scale_x_continuous(labels = reais()) +
+#'   scale_y_continuous(labels = reais()) +
 #'   labs(title = "Sensibilidade à variação dos Preços de Venda")
+#' @rdname involutivo
 #' @export
 
 sensibilidade_venda <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
@@ -236,6 +244,7 @@ sensibilidade_venda <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #'                              bdi_i = bdi_i, bdi_c = bdi_c,
 #'                              cor = cor, tma = tma)
 #' s_bdi_i
+#' @rdname involutivo
 #' @export
 
 sensibilidade_bdi_i <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
@@ -263,6 +272,7 @@ sensibilidade_bdi_i <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #'                                cor = cor, tma = tma
 #'                                )
 #' s_bdi_c
+#' @rdname involutivo
 #' @export
 
 sensibilidade_bdi_c <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
@@ -283,18 +293,21 @@ sensibilidade_bdi_c <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #'
 #' @examples
 #' wv_otimista <- c(0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)/20
-#' wv_pessimista <- c(0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)/20
-#' range_vv <- list(Pessimista = wv_pessimista, Provavel = wv, Otimista = wv_otimista)
+#' wv_pessimista <- c(0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+#' 1, 1, 1)/20
+#' range_vv <- list(Pessimista = wv_pessimista, Provavel = wv, 
+#' Otimista = wv_otimista)
 #' s_vv <- sensibilidade_vv(range_vv,
 #'                          cc = cc, wc = wc,
 #'                          vgv = vgv,
 #'                          bdi_i = bdi_i, bdi_c = bdi_c,
 #'                          cor = cor, tma = tma)
 #' s_vv
-#' ggplot(s_vv, aes(x = Situacao, y = vpl)) +
+#' ggplot(s_vv, aes(x = Situacao, y = VPL)) +
 #'   geom_col() +
-#'   scale_y_continuous(labels = scales::dollar) +
+#'   scale_y_continuous(labels = reais()) +
 #'   labs(title = "Sensibilidade à variação da velocidade de vendas")
+#' @rdname involutivo
 #' @export
 
 sensibilidade_vv <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
@@ -331,11 +344,15 @@ sensibilidade_vv <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #'                bdi_i = c(min = 0.9, max = 1.1),
 #'                bdi_c = c(min = 0.9, max = 1.1)
 #' )
-#' variables <- list(vgv = vgv, wv = wv, cc = cc, wc = wc, bdi_i = bdi_i, bdi_c = bdi_c, cor = cor, tma = tma)
+#' variables <- list(vgv = vgv, wv = wv, cc = cc, wc = wc, bdi_i = bdi_i, 
+#' bdi_c = bdi_c, cor = cor, tma = tma)
 #' dependencia100 <- matrix(data = c(1, -1, -1, -1,
 #'                                   -1, 1, 1, 1,
 #'                                   -1, 1, 1, 1,
-#'                                   -1, 1, 1, 1), nrow = 4, byrow = TRUE, dimnames = list(names(ranges), names(ranges)))
+#'                                   -1, 1, 1, 1), nrow = 4, 
+#'                                   byrow = TRUE, 
+#'                                   dimnames = list(names(ranges), 
+#'                                                   names(ranges)))
 #'
 #' Nsim <- 500
 #'
@@ -344,13 +361,15 @@ sensibilidade_vv <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #' m_unif100 <- mean(vpl_unif100$vpl)
 #' std_unif100 <- sd(vpl_unif100$vpl)
 #' hist(vpl_unif100$vpl, freq = FALSE)
-#' curve(dnorm(x, mean = m_unif100, sd = std_unif100), col = "darkblue", lwd = 2, add = TRUE, yaxt = "n")
+#' curve(dnorm(x, mean = m_unif100, sd = std_unif100), col = "darkblue", 
+#' lwd = 2, add = TRUE, yaxt = "n")
 #' summary(vpl_unif100$vpl)
 #'
 #' # Its possible to compute the probabilities based in the simulations:
-#' mean(vpl_unif100$vpl < 0.85*m_unif100) # probability that the VPL is less than 85% of the mean
+#' mean(vpl_unif100$vpl < 0.85*m_unif100) # probability that VPL < 85% of the mean
 #'
-#' # Or compute the probabilities based on the normal curve with mean and sd equals to that of the simulation.
+#' # Or compute the probabilities based on the normal curve with mean and sd 
+#' # equals to that of the simulation.
 #' pnorm(0.85*m_unif100, mean = m_unif100, sd = std_unif100)
 #'
 #' ## Simulacao de Monte Carlo com distribuição uniforme e dependencia 50%
@@ -358,17 +377,22 @@ sensibilidade_vv <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #' dependencia50 <- matrix(data = c(1, -.5, -.5, -.5,
 #'                                 -.5, 1, .5, .5,
 #'                                 -.5, .5, 1, .5,
-#'                                 -.5, .5, .5, 1), nrow = 4, byrow = TRUE, dimnames = list(names(ranges), names(ranges)))
+#'                                 -.5, .5, .5, 1), 
+#'                                 nrow = 4, 
+#'                                 byrow = TRUE, 
+#'                                 dimnames = list(names(ranges), 
+#'                                                 names(ranges)))
 #'
 #' vpl_unif50 <- vpl_sim(Nsim, ranges = ranges, variables = variables,
 #'                    distribution = "uniform", dependencia = dependencia50)
 #' m_unif50 <- mean(vpl_unif50$vpl)
 #' std_unif50 <- sd(vpl_unif50$vpl)
 #' hist(vpl_unif50$vpl, freq = FALSE)
-#' curve(dnorm(x, mean = m_unif50, sd = std_unif50), col = "darkblue", lwd = 2, add = TRUE, yaxt = "n")
+#' curve(dnorm(x, mean = m_unif50, sd = std_unif50), col = "darkblue", lwd = 2, 
+#' add = TRUE, yaxt = "n")
 #' summary(vpl_unif50$vpl)
 #'
-#' ## Simulacao de Monte Carlo com distribuição uniforme e variáveis totalmente independentes
+#' ## Simulacao de Monte Carlo com dist. uniforme e variáveis 100% independentes
 #'
 #' dependencia0 <- diag(4)
 #' dimnames(dependencia0) <- list(names(ranges), names(ranges))
@@ -378,7 +402,8 @@ sensibilidade_vv <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #' m_unif <- mean(vpl_unif$vpl)
 #' std_unif <- sd(vpl_unif$vpl)
 #' hist(vpl_unif$vpl, freq = FALSE)
-#' curve(dnorm(x, mean = m_unif, sd = std_unif), col = "darkblue", lwd = 2, add = TRUE, yaxt = "n")
+#' curve(dnorm(x, mean = m_unif, sd = std_unif), col = "darkblue", lwd = 2, 
+#' add = TRUE, yaxt = "n")
 #' summary(vpl_unif$vpl)
 #'
 #' ## Simulacao de Monte Carlo com distribuição beta e dependencia 100%
@@ -387,8 +412,9 @@ sensibilidade_vv <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #'                bdi_i = c(shape1 = 2, shape2 = 2),
 #'                bdi_c = c(shape1 = 2, shape2 = 2)
 #' )
-#' vpl_beta <- vpl_sim(Nsim, ranges = ranges, variables = variables, distribution = "beta",
-#'                     params = params, dependencia = dependencia100)
+#' vpl_beta <- vpl_sim(Nsim, ranges = ranges, variables = variables, 
+#'                     distribution = "beta", params = params, 
+#'                     dependencia = dependencia100)
 #'
 #' m_beta <- mean(vpl_beta$vpl)
 #' std_beta <- sd(vpl_beta$vpl)
@@ -398,7 +424,7 @@ sensibilidade_vv <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #'     fun = dnorm,
 #'     args = list(mean = m_beta, sd = std_beta)
 #'   )
-
+#' @rdname involutivo
 #' @export
 
 vpl_sim <- function(Nsim, ranges, variables, distribution = "uniform",
@@ -406,7 +432,8 @@ vpl_sim <- function(Nsim, ranges, variables, distribution = "uniform",
 
   n <- length(ranges)
   mu <- rep(0, n)
-  if (is.null(names(dependencia))) dimnames(dependencia) <- list(names(ranges), names(ranges))
+  if (is.null(names(dependencia))) dimnames(dependencia) <- list(names(ranges), 
+                                                                 names(ranges))
   Sigma <- dependencia
 
   rawvars <- MASS::mvrnorm(n = Nsim, mu = mu, Sigma = Sigma)
@@ -426,7 +453,8 @@ vpl_sim <- function(Nsim, ranges, variables, distribution = "uniform",
       qvars[[nam]] <- do.call("qbeta", list(pvars[[nam]], 
                                             params[[nam]]["shape1"], 
                                             params[[nam]]["shape2"]))
-      qvars[[nam]] <- (ranges[[nam]]["max"]*variables[[nam]] - ranges[[nam]]["min"]*variables[[nam]])*qvars[[nam]] +
+      qvars[[nam]] <- (ranges[[nam]]["max"]*variables[[nam]] - 
+                         ranges[[nam]]["min"]*variables[[nam]])*qvars[[nam]] +
         ranges[[nam]]["min"]*variables[[nam]]
     }
     qvars <- tibble::as_tibble(qvars)

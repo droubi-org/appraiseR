@@ -9,12 +9,14 @@
   \item VU unitary value per squared meter.
 }}
 \source{
-\strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes I}. Florianopolis: IBAPE/SC, 2005, p.18
+\strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes I}. 
+Florianopolis: IBAPE/SC, 2005, p.18
 }
 \usage{
 trindade
 }
 \description{
-A tibble containing a sample of 15 unitary values of apartment sales prices per squared meters.
+A tibble containing a sample of 15 unitary values of apartment sales prices 
+per squared meters.
 }
 \keyword{datasets}

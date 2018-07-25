@@ -13,12 +13,14 @@
   \item zoneamento zone.
 }}
 \source{
-\strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes II}. Florianopolis: IBAPE/SC, 2005, p.3.4
+\strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes II}. 
+Florianopolis: IBAPE/SC, 2005, p.3.4
 }
 \usage{
 canasvieiras_97
 }
 \description{
-A tibble containing a sample of 15 unitary values of plots sales prices per squared meters.
+A tibble containing a sample of 15 unitary values of plots sales prices per 
+squared meters.
 }
 \keyword{datasets}

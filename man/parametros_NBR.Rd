@@ -22,12 +22,6 @@ aval_intervalar(Y)
 
 \item{amplitude}{a vector containing the amplitudes of the estimations
 \code{\link{bestfit}}}
-
-\item{Y}{dataframe with \emph{Y_hat} values with or without
-confidence/prediction \code{\link{bestfit}}}
-
-\item{Y}{dataframe with \emph{Y_hat} values with or without confidence/prediction 
-\code{\link{bestfit}}}
 }
 \value{
 a vector containing the amplitudes of the \emph{Y_hat} in \%
@@ -50,6 +44,7 @@ Interval evaluation based on NBR14.653-2.
 }
 \examples{
 fit <- lm(log(valor) ~ ., data = centro_2015@data)
+require(dplyr)
 aval <- centro_2015@data \%>\% filter(is.na(valor))
 Y_hat <- predict(object = fit, interval = "confidence", newdata = aval)
 Y_hat <- inverse(Y_hat, "log")

@@ -3,15 +3,18 @@
 \docType{data}
 \name{jungles}
 \alias{jungles}
-\title{Parametrized optimals costs percentages per period according to Jungles and Ávila (2009)}
+\title{Parametrized optimals costs percentages per period according to Jungles and 
+Ávila (2009)}
 \format{a tibble with 24 rows and 25 columns}
 \source{
-\strong{JUNGLES, A. E.; AVILA, A. V.}. \emph{Gestao do controle e planejamento de empreendimentos}. 2009.
+\strong{JUNGLES, A. E.; AVILA, A. V.}. \emph{Gestao do controle e 
+planejamento de empreendimentos}. 2009.
 }
 \usage{
 jungles
 }
 \description{
-A tibble containing optimal costs percentages for each period for projects with 1 to 24 periods.
+A tibble containing optimal costs percentages for each period for projects 
+with 1 to 24 periods.
 }
 \keyword{datasets}

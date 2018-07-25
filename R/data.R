@@ -225,7 +225,7 @@ devtools::use_data(centro_2015, centro_13_15, itacorubi_2015,
 #'    \item data_2015: boolean to specify if data is from 2015 -
 #'     sim, nao (TRUE, FALSE)
 #' }
-#' @source \strong{IBAPE/SC}. \emph{Curso de Engenharia de Avaliacoes Imobiliarias – modulo basico}.
+#' @source \strong{IBAPE/SC}. \emph{Curso de Engenharia de Avaliacoes Imobiliarias: modulo basico}.
 #' Florianopolis, maio/2015
 "centro_13_15"
 
@@ -250,7 +250,7 @@ devtools::use_data(centro_2015, centro_13_15, itacorubi_2015,
 #'    \item novo: boolean for brand new apartaments -
 #'     novo, usado (TRUE, FALSE)
 #' }
-#' @source \strong{IBAPE/SC}. \emph{Curso de Engenharia de Avaliacoes Imobiliarias – modulo basico}.
+#' @source \strong{IBAPE/SC}. \emph{Curso de Engenharia de Avaliacoes Imobiliarias: modulo basico}.
 #' Florianopolis, maio/2015
 "itacorubi_2015"
 
@@ -273,14 +273,16 @@ devtools::use_data(centro_2015, centro_13_15, itacorubi_2015,
 #'    \item padrao: Building Standard -
 #'     baixo, medio, alto (i.e. low, normal, high)
 #' }
-#' @source \strong{Trivelloni, Carlos Alberto Peruzzo}. \emph{Metodo para determinacao do valor da localizacao
-#'  com uso de tecnicas inferenciais e geoestatisticas na avaliacao em massa de imoveis}. Florianopolis, 2005.
+#' @source \strong{Trivelloni, Carlos Alberto Peruzzo}. 
+#' \emph{Metodo para determinacao do valor da localizacao com uso de tecnicas 
+#' inferenciais e geoestatisticas na avaliacao em massa de imoveis}. 
+#' Florianopolis, 2005.
 "trivelloni_2005"
 
 #' Land division data
 #'
-#' A tibble containing a sample of 20 plots in subdivision in Florianopolis. Paradigm situation:
-#' dry, flat, 15m front width and 30~60m length.
+#' A tibble containing a sample of 20 plots in subdivision in Florianopolis. 
+#' Paradigm situation: dry, flat, 15m front width and 30~60m length.
 #'
 #' @format A tibble with 20 rows and 8 variables:
 #' \itemize{
@@ -296,12 +298,14 @@ devtools::use_data(centro_2015, centro_13_15, itacorubi_2015,
 #'   \item pedologia: pedology -
 #'   seco, pantanoso (i.e. dry, marshy)
 #' }
-#' @source \strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes I}. Florianopolis: IBAPE/SC, 2005, p.74
+#' @source \strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes I}. 
+#' Florianopolis: IBAPE/SC, 2005, p.74
 "loteamento"
 
 #' Income
 #'
-#' A tibble containing a sample of 7 apartments to be used to appraise by the the Income Method.
+#' A tibble containing a sample of 7 apartments to be used to appraise by the 
+#' Income Method.
 #'
 #' @format a tibble with 7 rows and 5 variables:
 #' \itemize{
@@ -311,12 +315,14 @@ devtools::use_data(centro_2015, centro_13_15, itacorubi_2015,
 #'   \item vacancia: Vacancy
 #'   \item condominio: condominium fee
 #' }
-#' @source \strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes I}. Florianopolis: IBAPE/SC, 2005, p.99
+#' @source \strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes I}. 
+#' Florianopolis: IBAPE/SC, 2005, p.99
 "renda"
 
 #' Prices of 15 plots in Canasvieiras (1997)
 #' 
-#' A tibble containing a sample of 15 unitary values of plots sales prices per squared meters.
+#' A tibble containing a sample of 15 unitary values of plots sales prices per 
+#' squared meters.
 #' @format a tibble with 15 rows and 5 columns
 #' \itemize{
 #'   \item endereco address.
@@ -325,7 +331,8 @@ devtools::use_data(centro_2015, centro_13_15, itacorubi_2015,
 #'   \item dist_b_mar distance to the sea.
 #'   \item zoneamento zone.
 #' }
-#' @source \strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes II}. Florianopolis: IBAPE/SC, 2005, p.3.4
+#' @source \strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes II}. 
+#' Florianopolis: IBAPE/SC, 2005, p.3.4
 "canasvieiras_97"
 
 
@@ -333,7 +340,8 @@ devtools::use_data(centro_2015, centro_13_15, itacorubi_2015,
 
 #' Prices of 48 plots at the beach
 #' 
-#' A tibble containing a sample of 48 unitary values of plots sales prices per squared meters.
+#' A tibble containing a sample of 48 unitary values of plots sales prices per 
+#' squared meters.
 #' @format a tibble with 48 rows and 8 columns
 #' \itemize{
 #'   \item valor_unitario unitary value per squared meter.
@@ -345,23 +353,29 @@ devtools::use_data(centro_2015, centro_13_15, itacorubi_2015,
 #'   \item dist_b_mar distance to the sea.
 #'   \item zoneamento zone.
 #' }
-#' @source \strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes II}. Florianopolis: IBAPE/SC, 2005, p.E2.2
+#' @source \strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes II}. 
+#' Florianopolis: IBAPE/SC, 2005, p.E2.2
 "terrenos_praia"
 
 #' Prices of 15 Florianopolis' apartaments with 2 rooms in Trindade neighbourhood
 #'
-#' A tibble containing a sample of 15 unitary values of apartment sales prices per squared meters.
+#' A tibble containing a sample of 15 unitary values of apartment sales prices 
+#' per squared meters.
 #' @format a tibble with 15 rows and 1 variable:
 #' \itemize{
 #'   \item VU unitary value per squared meter.
 #' }
-#' @source \strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes I}. Florianopolis: IBAPE/SC, 2005, p.18
+#' @source \strong{HOCHHEIM, Norberto}. \emph{Engenharia de Avaliacoes I}. 
+#' Florianopolis: IBAPE/SC, 2005, p.18
 "trindade"
 
-#' Parametrized optimals costs percentages per period according to Jungles and Ávila (2009)
+#' Parametrized optimals costs percentages per period according to Jungles and 
+#' Ávila (2009)
 #' 
-#' A tibble containing optimal costs percentages for each period for projects with 1 to 24 periods.
+#' A tibble containing optimal costs percentages for each period for projects 
+#' with 1 to 24 periods.
 #' @format a tibble with 24 rows and 25 columns
 #' 
-#' @source \strong{JUNGLES, A. E.; AVILA, A. V.}. \emph{Gestao do controle e planejamento de empreendimentos}. 2009.
+#' @source \strong{JUNGLES, A. E.; AVILA, A. V.}. \emph{Gestao do controle e 
+#' planejamento de empreendimentos}. 2009.
 "jungles"

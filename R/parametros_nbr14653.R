@@ -10,6 +10,7 @@
 #'  
 #'@examples
 #'fit <- lm(log(valor) ~ ., data = centro_2015@data)
+#'require(dplyr)
 #'aval <- centro_2015@data %>% filter(is.na(valor))
 #'Y_hat <- predict(object = fit, interval = "confidence", newdata = aval)
 #'Y_hat <- inverse(Y_hat, "log")
@@ -57,8 +58,6 @@ g_precisao <- function(amplitude) {
 #'
 #'Interval of arbitration according to NBR14.653-2.
 #'
-#'@param Y dataframe with \emph{Y_hat} values with or without
-#'  confidence/prediction \code{\link{bestfit}}
 #'  
 #'@return a vector containing the interval of arbitration according to
 #'  NBR14.653-2.
@@ -77,9 +76,6 @@ campo_arbitrio <- function(Y){
 #'according to NBR14.653-2
 #'
 #'Interval evaluation based on NBR14.653-2.
-#'
-#'@param Y dataframe with \emph{Y_hat} values with or without confidence/prediction 
-#'\code{\link{bestfit}}
 #'
 #'@return a vector containing interval evaluation according to NBR14.653-2.
 #'
