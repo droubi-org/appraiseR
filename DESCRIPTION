@@ -1,7 +1,9 @@
 Package: appraiseR
 Title: Tools for Real Estate Appraisal
 Version: 0.1.0.9000
-Authors@R: person("Luiz", "Droubi", email = "lfpdroubi@gmail.com", role = c("aut", "cre"))
+Authors@R: c(
+    person("Luiz F. P.", "Droubi", email = "lfpdroubi@gmail.com", role = c("aut", "cre")),
+    person("Willian", "Zonato", email = "will.zonato@gmail.com", role = "ctb"))
 URL: https://github.com/lfpdroubi/REATOOLS
 BugReports: https://github.com/lfpdroubi/REATOOLS/issues
 Description: A set of tools that solves a common set of problems for Real
