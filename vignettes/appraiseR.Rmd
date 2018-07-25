@@ -6,8 +6,8 @@ output:
   rmarkdown::html_vignette:
     keep_md: yes
 vignette: >
-  %\VignetteIndexEntry{appraiseR}
   %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{appraiseR}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -145,9 +145,18 @@ pl
 
 With these plots one verifies if the variables in the model works as predicted by the user.
 
+By default, `plotmod` chooses the median values of the predictors other than the one plotted. The `local` argument in `plotmod` function allows the user to specify the variables plots against the regressor which passes through that local point.
+
+```{r plotmod2, fig.cap = "plotmod output with local argument specified"}
+plotmod(best_fit, interval = "confidence", level = 0.80, 
+        local = list(area_total = 205, quartos = 3, suites = 1, garagens = 2, 
+                     dist_b_mar = 250, padrao = "medio"))
+```
+
+
 A third visualization tool in appraiseR is the `gen_map` function. 
 
-```{r map}
+```{r map, fig.cap = "gen_map output."}
 gen_map(centro_2015)
 ```
 

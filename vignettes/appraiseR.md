@@ -1,13 +1,13 @@
 ---
 title: "appraiseR"
 author: "Luiz Fernando Palin Droubi"
-date: "08/03/2018"
+date: "25/07/2018"
 output: 
   rmarkdown::html_vignette:
     keep_md: yes
 vignette: >
-  %\VignetteIndexEntry{appraiseR}
   %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{appraiseR}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -223,7 +223,6 @@ car::outlierTest(s$fit)
 ```
 
 ```
-## 
 ## No Studentized residuals with Bonferonni p < 0.05
 ## Largest |rstudent|:
 ##     rstudent unadjusted p-value Bonferonni p
@@ -314,6 +313,21 @@ pl
 
 With these plots one verifies if the variables in the model works as predicted by the user.
 
+By default, `plotmod` chooses the median values of the predictors other than the one plotted. The `local` argument in `plotmod` function allows the user to specify the variables plots against the regressor which passes through that local point.
+
+
+```r
+plotmod(best_fit, interval = "confidence", level = 0.80, 
+        local = list(area_total = 205, quartos = 3, suites = 1, garagens = 2, 
+                     dist_b_mar = 250, padrao = "medio"))
+```
+
+<div class="figure" style="text-align: center">
+<img src="./plotmod2-1.png" alt="plotmod output with local argument specified" width="90%" />
+<p class="caption">plotmod output with local argument specified</p>
+</div>
+
+
 A third visualization tool in appraiseR is the `gen_map` function. 
 
 
@@ -321,7 +335,10 @@ A third visualization tool in appraiseR is the `gen_map` function.
 gen_map(centro_2015)
 ```
 
-<img src="./map-1.png" width="90%" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="./map-1.png" alt="gen_map output." width="90%" />
+<p class="caption">gen_map output.</p>
+</div>
 
 
 ## Predictions

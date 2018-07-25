@@ -278,9 +278,22 @@ plotmod output.
 </p>
 </div>
 <p>With these plots one verifies if the variables in the model works as predicted by the user.</p>
+<p>By default, <code>plotmod</code> chooses the median values of the predictors other than the one plotted. The <code>local</code> argument in <code>plotmod</code> function allows the user to specify the variables plots against the regressor which passes through that local point.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plotmod.html">plotmod</a></span>(best_fit, <span class="dt">interval =</span> <span class="st">"confidence"</span>, <span class="dt">level =</span> <span class="fl">0.80</span>, 
+        <span class="dt">local =</span> <span class="kw">list</span>(<span class="dt">area_total =</span> <span class="dv">205</span>, <span class="dt">quartos =</span> <span class="dv">3</span>, <span class="dt">suites =</span> <span class="dv">1</span>, <span class="dt">garagens =</span> <span class="dv">2</span>, 
+                     <span class="dt">dist_b_mar =</span> <span class="dv">250</span>, <span class="dt">padrao =</span> <span class="st">"medio"</span>))</code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="plotmod2-1.png" alt="plotmod output with local argument specified" width="90%"><p class="caption">
+plotmod output with local argument specified
+</p>
+</div>
 <p>A third visualization tool in appraiseR is the <code>gen_map</code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/gen_map.html">gen_map</a></span>(centro_<span class="dv">2015</span>)</code></pre></div>
-<p><img src="map-1.png" width="90%" style="display: block; margin: auto;"></p>
+<div class="figure" style="text-align: center">
+<img src="map-1.png" alt="gen_map output." width="90%"><p class="caption">
+gen_map output.
+</p>
+</div>
 </div>
 <div id="predictions" class="section level2">
 <h2 class="hasAnchor">
