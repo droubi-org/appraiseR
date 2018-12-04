@@ -6,5 +6,6 @@ appraiseR is a package built in order to help engineers to appraise Real Estate 
 To install this package from github:
 
 ``` r
+if(!require(devtools)) install.packages("devtools")
 devtools::install_github("lfpdroubi/appraiseR")
 ```
