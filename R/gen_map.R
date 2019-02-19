@@ -8,15 +8,20 @@
 #'
 #' gen_map(centro_2015)
 
-gen_map <- function(data, proj = "+proj=utm +zone=22 +south +ellps=WGS84 +units=m +no_defs"){
+gen_map <- function(data, 
+                    proj = "+proj=utm +zone=22 +south +ellps=WGS84 +units=m +no_defs",
+                    api_key){
   coords <- proj4::project(as.matrix(sp::coordinates(data)), 
                            proj = proj, 
                            inverse = TRUE)
-  
-  m <- ggmap::get_map(location = apply(coords, 2, mean), zoom = 15)
-  df <- as.data.frame(coords)
-  colnames(df) <- c("lon", "lat")
+  colnames(coords) <- c("lon", "lat")
+  coords <- as.data.frame(coords)
+  bb <- c(left = min(coords[, "lon"]), bottom = min(coords[, "lat"]), 
+          right = max(coords[, "lon"]), top = max(coords[, "lat"]))
+  ggmap::register_google(key = api_key)
+  m <- ggmap::get_map(bbox = bb)
+
   ggmap::ggmap(m) + 
-    geom_point(data = df, aes(x = lon, y = lat, color = "red")) +
+    geom_point(data = coords, aes(x = lon, y = lat, color = "red")) +
     guides(color = FALSE) 
 }

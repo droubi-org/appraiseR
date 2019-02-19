@@ -156,9 +156,9 @@ plotmod(best_fit, interval = "confidence", level = 0.80,
 
 A third visualization tool in appraiseR is the `gen_map` function. 
 
-```{r map, fig.cap = "gen_map output."}
-gen_map(centro_2015)
-```
+# ```{r map, fig.cap = "gen_map output."}
+# gen_map(centro_2015)
+# ```
 
 
 ## Predictions
