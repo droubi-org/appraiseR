@@ -9,6 +9,7 @@
 #' @export
 #' @examples
 #' ## newdata inside the data file
+#' data(centro_2015)
 #' fit <- lm(log(valor) ~ ., centro_2015@data)
 #' extrapolate(object = fit)
 #' 
@@ -29,63 +30,63 @@ extrapolate <- function(object, newdata){
   cl <- stats::getCall(z)
   data <- eval(cl$data, environment(stats::formula(z)))
   param <- parameters(z)
-  preds <- param$predictors
-  response <- param$response
+  preds <- rlang::syms(param$predictors)
+  response <- rlang::sym(param$response)
 
-  if (missing(newdata)) newdata <- data[which(is.na(data[, response])), preds]
-  id <- NULL
-  id2 <- NULL
-  maxs <- plyr::numcolwise(max)(data[preds])
-  mins <- plyr::numcolwise(min)(data[preds])
-  numeric <- plyr::colwise(is.numeric)(newdata)
-  num_preds <- which(numeric == TRUE)
-  newdata_num <- as.data.frame(newdata[num_preds])
-  extr <- plyr::adply(newdata_num, 1,
-                      function(x) x - pmin(x, maxs) + x - pmax(x, mins))
-  rownames(extr) <- rownames(newdata)
-
-  ## Verifies if there is extrapolation
-  x <- matrix(data = 0, nrow = nrow(extr), ncol = ncol(extr))
-  x <- as.data.frame(x, row.names = row.names(extr))
-  colnames(x) <- colnames(extr)
-
-  if (isTRUE(all.equal(x, extr))) {
-    extr_p <- NULL
-    front <- NULL
-    y <- NULL
-    x <- NULL
-  } else {
-    ## Computes the extrapoled percentual
-    extr <- as.matrix(extr)
-    extrPPlus <- plyr::adply(extr, 1,
-                            function(x)  x[x>0]/maxs[names(x[x>0])], .id = "id")
-    extrPMinus <- plyr::adply(extr, 1,
-                            function(x)  x[x<0]/mins[names(x[x<0])], .id = "id")
-    extr_p <- merge(extrPPlus, extrPMinus, by="id", all.x = TRUE, all.y=TRUE)
-    rownames(extr_p) <- extr_p[,"id"]
-    extr_p <- subset(extr_p, select = -id)
-
-    ## Computes the frontier of the variables for each newdata row
-    front <- plyr::adply(newdata, 1, function(x) pmax(pmin(x, maxs), mins))
-    rownames(front) <- rownames(newdata)
-
-    ## Classifie the degrees of the extrapolation for each predictor
-    y <- plyr::adply(extr_p, c(1,2),
-                     function(x) ifelse(x > 1 | x < -.5,
-                                        sprintf("OUT", 100*x),
-                                        sprintf("%.2f%%(Grau I/II)", 100*x)),
-                     .id = c("id1","id2"))
-
-    y <- subset(y, subset = rowSums(is.na(y)) != ncol(y)-2, select = -id2)
-
-    ## Classifie each appraisal for extrapolation
-    nvar_extrap <- as.data.frame(rowSums(!is.na(extr_p)))
-    colnames(nvar_extrap) <- 'N_var'
-    x <- apply(nvar_extrap, 1, function(x) if (x > 1) "I" else "II")
+  if (missing(newdata)) {
+    newdata <- 
+      data %>% 
+      filter(is.na(!!response)) %>% 
+      select(!!!preds)    
   }
-  return(list(valor = extr,
-              percentual = extr_p,
-              fronteira = front,
-              grau_variaveis = y,
-              grau_aval = x))
+
+  extr <- MaxsAndMins(newdata, data)
+  # 
+  # ## Verifies if there is extrapolation
+  # x <- matrix(data = 0, nrow = nrow(extr), ncol = ncol(extr))
+  # x <- as.data.frame(x, row.names = row.names(extr))
+  # colnames(x) <- colnames(extr)
+  # 
+  # if (isTRUE(all.equal(x, extr))) {
+  #   extr_p <- NULL
+  #   front <- NULL
+  #   y <- NULL
+  #   x <- NULL
+  # } else {
+  #   ## Computes the extrapoled percentual
+  #   extr <- as.matrix(extr)
+  #   extrPPlus <- plyr::adply(extr, 1,
+  #                           function(x)  x[x>0]/maxs[names(x[x>0])], .id = "id")
+  #   extrPMinus <- plyr::adply(extr, 1,
+  #                           function(x)  x[x<0]/mins[names(x[x<0])], .id = "id")
+  #   extr_p <- merge(extrPPlus, extrPMinus, by="id", all.x = TRUE, all.y=TRUE)
+  #   rownames(extr_p) <- extr_p[,"id"]
+  #   extr_p <- subset(extr_p, select = -id)
+  # 
+  #   ## Computes the frontier of the variables for each newdata row
+  #   front <- plyr::adply(newdata, 1, function(x) pmax(pmin(x, maxs), mins))
+  #   rownames(front) <- rownames(newdata)
+  # 
+  #   ## Classifie the degrees of the extrapolation for each predictor
+  #   y <- plyr::adply(extr_p, c(1,2),
+  #                    function(x) ifelse(x > 1 | x < -.5,
+  #                                       sprintf("OUT", 100*x),
+  #                                       sprintf("%.2f%%(Grau I/II)", 100*x)),
+  #                    .id = c("id1","id2"))
+  # 
+  #   y <- subset(y, subset = rowSums(is.na(y)) != ncol(y)-2, select = -id2)
+  # 
+  #   ## Classifie each appraisal for extrapolation
+  #   nvar_extrap <- as.data.frame(rowSums(!is.na(extr_p)))
+  #   colnames(nvar_extrap) <- 'N_var'
+  #   x <- apply(nvar_extrap, 1, function(x) if (x > 1) "I" else "II")
+  # }
+  return(list(newdata = newdata,
+              valor = extr,
+              # percentual = extr_p,
+              # fronteira = front,
+              # grau_variaveis = y,
+              # grau_aval = x
+              )
+         )
 }

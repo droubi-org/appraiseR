@@ -4,13 +4,9 @@
 \name{reexports}
 \alias{reexports}
 \alias{\%>\%}
-\alias{reexports}
 \alias{\%<>\%}
-\alias{reexports}
 \alias{\%$\%}
-\alias{reexports}
 \alias{pnorm}
-\alias{reexports}
 \alias{predict}
 \title{Objects exported from other packages}
 \keyword{internal}

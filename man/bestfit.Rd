@@ -10,8 +10,8 @@ bestfit(X, ...)
 
 \method{bestfit}{default}(X, y, t = list(), p = list(), response, ...)
 
-\method{bestfit}{formula}(formula, data, subset, transf = c("rsqrt", "log",
-  "sqrt"), ...)
+\method{bestfit}{formula}(formula, data, subset, transf = c("rsqrt",
+  "log", "sqrt"), ...)
 }
 \arguments{
 \item{X}{a design matrix for a regression model}

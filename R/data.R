@@ -51,8 +51,6 @@ jungles <- tibble::tribble(
       24,   1,  1,  2,  2,  3,  3,  4,  6,  6,  6,  6,  6,  7,  7,  6,  6,  6,  5,  5,  5,  3,  2,  1,  1
 )
   
-                    
-
 ## Tidying data
 
 # centro_2015
@@ -75,15 +73,17 @@ colnames(centro_13_15) <- c("valor", "area_total", "quartos", "suites",
                             "data_2015", "E", "N")
 
 centro_13_15$padrao %<>%
-  readr::parse_factor(levels = c(1, 2, 3))
+  factor(levels = c(1, 2, 3), labels = c("baixo", "medio", "alto"))
+# centro_13_15$padrao %<>%
+#   readr::parse_factor(levels = c(1, 2, 3))
+# 
+# centro_13_15$padrao %<>%
+#   forcats::fct_recode(baixo = "1", medio = "2", alto = "3")
 
-centro_13_15$padrao %<>%
-  forcats::fct_recode(baixo = "1", medio = "2", alto = "3")
-
-centro_13_15$novo %<>% readr::parse_factor(c(0, 1))
+centro_13_15$novo %<>% as.factor()
 centro_13_15$novo %<>% forcats::fct_recode(usado = "0", novo = "1")
 
-centro_13_15$data_2015 %<>% readr::parse_factor(levels = c(0, 1))
+centro_13_15$data_2015 %<>% as.factor()
 
 centro_13_15$data_2015 %<>% forcats::fct_recode(nao = "0", sim = "1")
 
@@ -111,14 +111,12 @@ colnames(trivelloni_2005) <- c("Obs", "E", "N", "valor", "tipo", "area_total",
                                "area_terreno", "garagens", "novo",
                                "P_2", "P_3", "P_4")
 
-trivelloni_2005$novo %<>%
-  readr::parse_factor(levels = c(0, 1))
+trivelloni_2005$novo %<>% as.factor()
 
 trivelloni_2005$novo %<>%
   forcats::fct_recode(usado = "0", novo = "1")
 
-trivelloni_2005$garagens %<>%
-  readr::parse_factor(levels = c(0, 1))
+trivelloni_2005$garagens %<>% as.factor()
 
 trivelloni_2005$garagens %<>%
   forcats::fct_recode(nao = "0", sim = "1")
@@ -179,7 +177,7 @@ trivelloni_2005 <-
                                                    +units=m +ellps=aust_SA
                                                    +towgs84=-67.35,3.88,-38.22"))
 
-devtools::use_data(centro_2015, centro_13_15, itacorubi_2015,
+usethis::use_data(centro_2015, centro_13_15, itacorubi_2015,
                    trivelloni_2005, loteamento, renda, 
                    canasvieiras_97, trindade_ap, terrenos_praia,
                    trindade, jungles, overwrite = TRUE)

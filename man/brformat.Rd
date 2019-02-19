@@ -4,8 +4,8 @@
 \alias{brformat}
 \title{Wrapper around format}
 \usage{
-brformat(x, decimal.mark = ",", big.mark = ".", digits = 2, nsmall = 2,
-  scientific = FALSE, ...)
+brformat(x, decimal.mark = ",", big.mark = ".", digits = 2,
+  nsmall = 2, scientific = FALSE, ...)
 }
 \arguments{
 \item{x}{a number to be formatted by \code{format}}
