@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-#' 
+#' library(dplyr)
 #' data(centro_2015)
 #' data <- centro_2015@data#' 
 #' newdata <- 
@@ -23,22 +23,22 @@
 MaxsAndMins <- function(newdata, data) {
   maxs <- 
     data %>% 
-    select(colnames(newdata)) %>%
-    select_if(is.numeric) %>% 
-    summarize_all(max, na.rm = TRUE) %>%
+    dplyr::select(colnames(newdata)) %>%
+    dplyr::select_if(is.numeric) %>% 
+    dplyr::summarize_all(max, na.rm = TRUE) %>%
     unlist()
   mins <- 
     data %>% 
-    select(colnames(newdata)) %>%
-    select_if(is.numeric) %>% 
-    summarize_all(min, na.rm = TRUE) %>%
+    dplyr::select(colnames(newdata)) %>%
+    dplyr::select_if(is.numeric) %>% 
+    dplyr::summarize_all(min, na.rm = TRUE) %>%
     unlist()
   df <- list()
   for (i in seq_len(dim(newdata)[1])){
     x <- 
       newdata %>% 
-      select_if(is.numeric) %>%
-      slice(!!i) %>% 
+      dplyr::select_if(is.numeric) %>%
+      dplyr::slice(!!i) %>% 
       unlist()
     df[[i]] <- x - pmin(x, maxs) + x - pmax(x, mins)  
   }

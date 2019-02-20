@@ -17,7 +17,7 @@ MaxsAndMins(newdata, data)
 Find out how much new data extrapolates the model data
 }
 \examples{
-
+library(dplyr)
 data(centro_2015)
 data <- centro_2015@data#' 
 newdata <- 

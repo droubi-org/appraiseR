@@ -47,9 +47,6 @@ plotmod(best_fit, interval = "confidence", level = 0.80,
         local = list(area_total = 205, quartos = 3, suites = 1, garagens = 2, 
                      dist_b_mar = 250, padrao = "medio"))
 
-## ----map, fig.cap = "gen_map output."------------------------------------
-gen_map(centro_2015)
-
 ## ----predict-------------------------------------------------------------
 p <- predict(best_fit, interval = "confidence", level = 0.80)
 p

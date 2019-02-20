@@ -21,14 +21,14 @@
     novo, usado (TRUE, FALSE)
 }}
 \source{
-\strong{IBAPE/SC}. \emph{Curso de Engenharia de Avaliacoes Imobiliarias: modulo basico}.
-Florianopolis, maio/2015
+\strong{IBAPE/SC}. \emph{Curso de Engenharia de Avaliacoes 
+Imobiliarias: modulo basico}. Florianopolis, maio/2015
 }
 \usage{
 itacorubi_2015
 }
 \description{
-A SpatialPointsDataFrame containing a sample of 63 apartaments with prices and other
-attributes in Florianopolis' Itacorubi neighbourhood
+A SpatialPointsDataFrame containing a sample of 63 apartaments with 
+prices and other attributes in Florianopolis' Itacorubi neighbourhood
 }
 \keyword{datasets}

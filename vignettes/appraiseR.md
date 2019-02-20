@@ -1,7 +1,7 @@
 ---
 title: "appraiseR"
 author: "Luiz Fernando Palin Droubi"
-date: "25/07/2018"
+date: "20/02/2019"
 output: 
   rmarkdown::html_vignette:
     keep_md: yes
@@ -326,20 +326,6 @@ plotmod(best_fit, interval = "confidence", level = 0.80,
 <img src="./plotmod2-1.png" alt="plotmod output with local argument specified" width="90%" />
 <p class="caption">plotmod output with local argument specified</p>
 </div>
-
-
-A third visualization tool in appraiseR is the `gen_map` function. 
-
-
-```r
-gen_map(centro_2015)
-```
-
-<div class="figure" style="text-align: center">
-<img src="./map-1.png" alt="gen_map output." width="90%" />
-<p class="caption">gen_map output.</p>
-</div>
-
 
 ## Predictions
 

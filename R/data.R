@@ -184,8 +184,8 @@ usethis::use_data(centro_2015, centro_13_15, itacorubi_2015,
 
 #' Prices of 50 Florianopolis' downtown apartaments
 #'
-#' A SpatialPointsDataFrame containing a sample of 50 apartaments with prices and other
-#' attributes in Florianopolis' downtown
+#' A SpatialPointsDataFrame containing a sample of 50 apartaments with 
+#' prices and other attributes in Florianopolis' downtown
 #'
 #' @format A tibble with 53 rows (50 samples and 3 apartments to be
 #'   appraised) and 7 variables:
@@ -199,14 +199,14 @@ usethis::use_data(centro_2015, centro_13_15, itacorubi_2015,
 #'   \item padrao: Building Standard - baixo, medio, alto
 #'   (i.e. low, normal, high)
 #' }
-#' @source \strong{HOCHHEIM, Norberto}. \emph{Engenharia de avaliacoes imobiliarias: Modulo Basico}.
-#'  Florianopolis: IBAPE/SC, 2015, p.21-22
+#' @source \strong{HOCHHEIM, Norberto}. \emph{Engenharia de avaliacoes 
+#' imobiliarias: Modulo Basico}. Florianopolis: IBAPE/SC, 2015, p.21-22
 "centro_2015"
 
 #' Prices of Florianopolis' downtown apartaments in 2013 and 2015
 #'
-#' A SpatialPointsDataFrame containing two samples in different dates with prices and other
-#' attributes in Florianopolis' downtown
+#' A SpatialPointsDataFrame containing two samples in different dates with 
+#' prices and other attributes in Florianopolis' downtown
 #'
 #' @format A tibble with 90 rows and 11 variables:
 #' \itemize{
@@ -223,14 +223,14 @@ usethis::use_data(centro_2015, centro_13_15, itacorubi_2015,
 #'    \item data_2015: boolean to specify if data is from 2015 -
 #'     sim, nao (TRUE, FALSE)
 #' }
-#' @source \strong{IBAPE/SC}. \emph{Curso de Engenharia de Avaliacoes Imobiliarias: modulo basico}.
-#' Florianopolis, maio/2015
+#' @source \strong{IBAPE/SC}. \emph{Curso de Engenharia de Avaliacoes 
+#' Imobiliarias: modulo basico}. Florianopolis, maio/2015
 "centro_13_15"
 
 #' Prices of 63 Florianopolis' apartaments in Itacorubi neighbourhood
 #'
-#' A SpatialPointsDataFrame containing a sample of 63 apartaments with prices and other
-#' attributes in Florianopolis' Itacorubi neighbourhood
+#' A SpatialPointsDataFrame containing a sample of 63 apartaments with 
+#' prices and other attributes in Florianopolis' Itacorubi neighbourhood
 #'
 #' @format A tibble with 53 rows (50 samples and 3 apartments to be
 #'  appraised) and 9 variables:
@@ -248,14 +248,14 @@ usethis::use_data(centro_2015, centro_13_15, itacorubi_2015,
 #'    \item novo: boolean for brand new apartaments -
 #'     novo, usado (TRUE, FALSE)
 #' }
-#' @source \strong{IBAPE/SC}. \emph{Curso de Engenharia de Avaliacoes Imobiliarias: modulo basico}.
-#' Florianopolis, maio/2015
+#' @source \strong{IBAPE/SC}. \emph{Curso de Engenharia de Avaliacoes 
+#' Imobiliarias: modulo basico}. Florianopolis, maio/2015
 "itacorubi_2015"
 
 #' Prices of 249 Florianopolis' Real Estate
 #'
-#' A SpatialPointsDataFrame containing a sample of 249 Real Estate with prices and other
-#' attributes in Florianopolis' continental area
+#' A SpatialPointsDataFrame containing a sample of 249 Real Estate with 
+#' prices and other attributes in Florianopolis' continental area
 #'
 #' @format A tibble with 249 rows and 7 variables:
 #' \itemize{
@@ -368,7 +368,7 @@ usethis::use_data(centro_2015, centro_13_15, itacorubi_2015,
 "trindade"
 
 #' Parametrized optimals costs percentages per period according to Jungles and 
-#' Ávila (2009)
+#' Avila (2009)
 #' 
 #' A tibble containing optimal costs percentages for each period for projects 
 #' with 1 to 24 periods.

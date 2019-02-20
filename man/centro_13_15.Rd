@@ -20,14 +20,14 @@
     sim, nao (TRUE, FALSE)
 }}
 \source{
-\strong{IBAPE/SC}. \emph{Curso de Engenharia de Avaliacoes Imobiliarias: modulo basico}.
-Florianopolis, maio/2015
+\strong{IBAPE/SC}. \emph{Curso de Engenharia de Avaliacoes 
+Imobiliarias: modulo basico}. Florianopolis, maio/2015
 }
 \usage{
 centro_13_15
 }
 \description{
-A SpatialPointsDataFrame containing two samples in different dates with prices and other
-attributes in Florianopolis' downtown
+A SpatialPointsDataFrame containing two samples in different dates with 
+prices and other attributes in Florianopolis' downtown
 }
 \keyword{datasets}

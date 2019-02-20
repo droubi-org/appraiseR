@@ -138,7 +138,7 @@ VPL <- function(fcl, tma){
   sum(fcl$VP)
 }
 
-## Análise de sensibilidade
+## Analise de sensibilidade
 
 
 #' Sensibilidade aa TMA
@@ -155,7 +155,7 @@ VPL <- function(fcl, tma){
 #'   geom_line() + geom_point() +
 #'   scale_x_continuous(labels = scales::percent) +
 #'   scale_y_continuous(labels = reais()) +
-#'   labs(title = "Sensibilidade à TMA")
+#'   labs(title = "Sensibilidade aa TMA")
 #' @rdname involutivo
 #' @export
 
@@ -185,7 +185,7 @@ sensibilidade_tma <- function(range, fcl){
 #'   geom_line() + geom_point() +
 #'   scale_x_continuous(labels = reais()) +
 #'   scale_y_continuous(labels = reais()) +
-#'   labs(title = "Sensibilidade à variação dos Custos de Construção")
+#'   labs(title = "Sensibilidade aa variacao dos Custos de Construcao")
 #' @rdname involutivo
 #' @export
 
@@ -216,7 +216,7 @@ sensibilidade_custo <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #'   geom_point() + geom_line() +
 #'   scale_x_continuous(labels = reais()) +
 #'   scale_y_continuous(labels = reais()) +
-#'   labs(title = "Sensibilidade à variação dos Preços de Venda")
+#'   labs(title = "Sensibilidade aa variacao dos Precos de Venda")
 #' @rdname involutivo
 #' @export
 
@@ -306,7 +306,7 @@ sensibilidade_bdi_c <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #' ggplot(s_vv, aes(x = Situacao, y = VPL)) +
 #'   geom_col() +
 #'   scale_y_continuous(labels = reais()) +
-#'   labs(title = "Sensibilidade à variação da velocidade de vendas")
+#'   labs(title = "Sensibilidade aa variacao da velocidade de vendas")
 #' @rdname involutivo
 #' @export
 
@@ -325,18 +325,18 @@ sensibilidade_vv <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
   vpl
 }
 
-#' Simulação com o Método de Monte Carlo
+#' Simulacao com o Método de Monte Carlo
 #'
-#' @param Nsim Número de simulações
-#' @param ranges Intervalos de variação de cada variável
-#' @param variables Variáveis utilizadas para o computo do VPL
-#' @param distribution Distribuição a priori a ser utilizada para
-#' gerar as  variáveis
-#' @param params parâmtros a serem utilizados pelas distribuições a priori.
-#' @param dependencia matriz de covariância entre as variáveis
+#' @param Nsim Número de simulacões
+#' @param ranges Intervalos de variacao de cada variavel
+#' @param variables Variaveis utilizadas para o computo do VPL
+#' @param distribution Distribuicao a priori a ser utilizada para
+#' gerar as  variaveis
+#' @param params parâmtros a serem utilizados pelas distribuicões a priori.
+#' @param dependencia matriz de covariância entre as variaveis
 #'
 #' @examples
-#' ## Simulacao de Monte Carlo com distribuição uniforme e dependencia total
+#' ## Simulacao de Monte Carlo com distribuicao uniforme e dependencia total
 #'
 #' set.seed(1)
 #' ranges <- list(vgv = c(min = 0.9, max = 1.1),
@@ -372,7 +372,7 @@ sensibilidade_vv <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #' # equals to that of the simulation.
 #' pnorm(0.85*m_unif100, mean = m_unif100, sd = std_unif100)
 #'
-#' ## Simulacao de Monte Carlo com distribuição uniforme e dependencia 50%
+#' ## Simulacao de Monte Carlo com distribuicao uniforme e dependencia 50%
 #'
 #' dependencia50 <- matrix(data = c(1, -.5, -.5, -.5,
 #'                                 -.5, 1, .5, .5,
@@ -392,7 +392,7 @@ sensibilidade_vv <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #' add = TRUE, yaxt = "n")
 #' summary(vpl_unif50$vpl)
 #'
-#' ## Simulacao de Monte Carlo com dist. uniforme e variáveis 100% independentes
+#' ## Simulacao de Monte Carlo com dist. uniforme e variaveis 100% independentes
 #'
 #' dependencia0 <- diag(4)
 #' dimnames(dependencia0) <- list(names(ranges), names(ranges))
@@ -406,7 +406,7 @@ sensibilidade_vv <- function(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma){
 #' add = TRUE, yaxt = "n")
 #' summary(vpl_unif$vpl)
 #'
-#' ## Simulacao de Monte Carlo com distribuição beta e dependencia 100%
+#' ## Simulacao de Monte Carlo com distribuicao beta e dependencia 100%
 #' params <- list(vgv = c(shape1 = 2, shape2 = 2),
 #'                cc = c(shape1 = 2, shape2 = 2),
 #'                bdi_i = c(shape1 = 2, shape2 = 2),

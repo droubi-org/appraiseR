@@ -5,7 +5,8 @@
 \title{Generates map from SpatialPointsDataFrame}
 \usage{
 gen_map(data,
-  proj = "+proj=utm +zone=22 +south +ellps=WGS84 +units=m +no_defs")
+  proj = "+proj=utm +zone=22 +south +ellps=WGS84 +units=m +no_defs",
+  api_key)
 }
 \arguments{
 \item{data}{A SpatialPointsDataFrame.}

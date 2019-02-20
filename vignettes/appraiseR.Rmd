@@ -153,14 +153,6 @@ plotmod(best_fit, interval = "confidence", level = 0.80,
                      dist_b_mar = 250, padrao = "medio"))
 ```
 
-
-A third visualization tool in appraiseR is the `gen_map` function. 
-
-# ```{r map, fig.cap = "gen_map output."}
-# gen_map(centro_2015)
-# ```
-
-
 ## Predictions
 
 `predict` method is also available for `bestfit` objects. `predict` automatically searchs for newdata in the data frame of the model. `predict` does this searching for `NA` values in the response variable. If there are such data, then `predict` will automatically uses this values as the newdata option. Else, newdata must be explicitly provided to `predict.bestfit`, the same way it is done with `predict.lm`.

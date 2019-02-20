@@ -28,7 +28,7 @@ Florianopolis, 2005.
 trivelloni_2005
 }
 \description{
-A SpatialPointsDataFrame containing a sample of 249 Real Estate with prices and other
-attributes in Florianopolis' continental area
+A SpatialPointsDataFrame containing a sample of 249 Real Estate with 
+prices and other attributes in Florianopolis' continental area
 }
 \keyword{datasets}

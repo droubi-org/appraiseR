@@ -17,14 +17,14 @@
   (i.e. low, normal, high)
 }}
 \source{
-\strong{HOCHHEIM, Norberto}. \emph{Engenharia de avaliacoes imobiliarias: Modulo Basico}.
- Florianopolis: IBAPE/SC, 2015, p.21-22
+\strong{HOCHHEIM, Norberto}. \emph{Engenharia de avaliacoes 
+imobiliarias: Modulo Basico}. Florianopolis: IBAPE/SC, 2015, p.21-22
 }
 \usage{
 centro_2015
 }
 \description{
-A SpatialPointsDataFrame containing a sample of 50 apartaments with prices and other
-attributes in Florianopolis' downtown
+A SpatialPointsDataFrame containing a sample of 50 apartaments with 
+prices and other attributes in Florianopolis' downtown
 }
 \keyword{datasets}
