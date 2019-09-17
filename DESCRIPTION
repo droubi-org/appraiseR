@@ -14,12 +14,14 @@ Depends:
 License: MIT + file LICENSE
 LazyData: true
 Imports: 
+    car,
     dplyr,
     devtools,
     ggplot2,
     forcats,
     ggmap,
     gtools,
+    leaflet,
     magrittr,
     MASS,
     miscTools,
@@ -37,13 +39,11 @@ Imports:
     usethis,
     purrr
 Suggests: 
-    car,
     DT,
     ggvis,
     gridExtra,
     knitr,
     latex2exp,
-    leaflet,
     lmtest,
     pkgdown,
     plotmo,

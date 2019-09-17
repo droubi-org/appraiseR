@@ -15,7 +15,6 @@
 \alias{sensibilidade_bdi_i}
 \alias{sensibilidade_bdi_c}
 \alias{sensibilidade_vv}
-\alias{vpl_sim}
 \title{Real States appraisals based in the involutive method}
 \usage{
 involutivo_estatico(vgv, cc, bdi_c, bdi_i, cor)
@@ -45,9 +44,6 @@ sensibilidade_bdi_i(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma)
 sensibilidade_bdi_c(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma)
 
 sensibilidade_vv(range, cc, wc, vgv, wv, bdi_i, bdi_c, cor, tma)
-
-vpl_sim(Nsim, ranges, variables, distribution = "uniform", params,
-  dependencia = diag(length(ranges)))
 }
 \arguments{
 \item{vgv}{Overall Sales Value}
@@ -85,19 +81,6 @@ vpl_sim(Nsim, ranges, variables, distribution = "uniform", params,
 \item{fcl}{the Net Cash Flow of the project}
 
 \item{range}{range of variation}
-
-\item{Nsim}{Número de simulacões}
-
-\item{ranges}{Intervalos de variacao de cada variavel}
-
-\item{variables}{Variaveis utilizadas para o computo do VPL}
-
-\item{distribution}{Distribuicao a priori a ser utilizada para
-gerar as  variaveis}
-
-\item{params}{parâmtros a serem utilizados pelas distribuicões a priori.}
-
-\item{dependencia}{matriz de covariância entre as variaveis}
 }
 \value{
 the maximum building area
@@ -140,8 +123,6 @@ Sensibilidade-BDI do Incorporador
 Sensibilidade-BDI do Construtor
 
 Sensibilidade-Fluxo de Vendas
-
-Simulacao com o Método de Monte Carlo
 }
 \examples{
 ac <- AREA_CONSTRUIDA(630, 2.5, 5)
@@ -224,92 +205,4 @@ ggplot(s_vv, aes(x = Situacao, y = VPL)) +
   geom_col() +
   scale_y_continuous(labels = reais()) +
   labs(title = "Sensibilidade aa variacao da velocidade de vendas")
-## Simulacao de Monte Carlo com distribuicao uniforme e dependencia total
-
-set.seed(1)
-ranges <- list(vgv = c(min = 0.9, max = 1.1),
-               cc = c(min = 0.9, max = 1.1),
-               bdi_i = c(min = 0.9, max = 1.1),
-               bdi_c = c(min = 0.9, max = 1.1)
-)
-variables <- list(vgv = vgv, wv = wv, cc = cc, wc = wc, bdi_i = bdi_i, 
-bdi_c = bdi_c, cor = cor, tma = tma)
-dependencia100 <- matrix(data = c(1, -1, -1, -1,
-                                  -1, 1, 1, 1,
-                                  -1, 1, 1, 1,
-                                  -1, 1, 1, 1), nrow = 4, 
-                                  byrow = TRUE, 
-                                  dimnames = list(names(ranges), 
-                                                  names(ranges)))
-
-Nsim <- 500
-
-vpl_unif100 <- vpl_sim(Nsim, ranges = ranges, variables = variables,
-                   distribution = "uniform", dependencia = dependencia100)
-m_unif100 <- mean(vpl_unif100$vpl)
-std_unif100 <- sd(vpl_unif100$vpl)
-hist(vpl_unif100$vpl, freq = FALSE)
-curve(dnorm(x, mean = m_unif100, sd = std_unif100), col = "darkblue", 
-lwd = 2, add = TRUE, yaxt = "n")
-summary(vpl_unif100$vpl)
-
-# Its possible to compute the probabilities based in the simulations:
-mean(vpl_unif100$vpl < 0.85*m_unif100) # probability that VPL < 85\% of the mean
-
-# Or compute the probabilities based on the normal curve with mean and sd 
-# equals to that of the simulation.
-pnorm(0.85*m_unif100, mean = m_unif100, sd = std_unif100)
-
-## Simulacao de Monte Carlo com distribuicao uniforme e dependencia 50\%
-
-dependencia50 <- matrix(data = c(1, -.5, -.5, -.5,
-                                -.5, 1, .5, .5,
-                                -.5, .5, 1, .5,
-                                -.5, .5, .5, 1), 
-                                nrow = 4, 
-                                byrow = TRUE, 
-                                dimnames = list(names(ranges), 
-                                                names(ranges)))
-
-vpl_unif50 <- vpl_sim(Nsim, ranges = ranges, variables = variables,
-                   distribution = "uniform", dependencia = dependencia50)
-m_unif50 <- mean(vpl_unif50$vpl)
-std_unif50 <- sd(vpl_unif50$vpl)
-hist(vpl_unif50$vpl, freq = FALSE)
-curve(dnorm(x, mean = m_unif50, sd = std_unif50), col = "darkblue", lwd = 2, 
-add = TRUE, yaxt = "n")
-summary(vpl_unif50$vpl)
-
-## Simulacao de Monte Carlo com dist. uniforme e variaveis 100\% independentes
-
-dependencia0 <- diag(4)
-dimnames(dependencia0) <- list(names(ranges), names(ranges))
-
-vpl_unif <- vpl_sim(Nsim, ranges = ranges, variables = variables,
-                   distribution = "uniform", dependencia = dependencia0)
-m_unif <- mean(vpl_unif$vpl)
-std_unif <- sd(vpl_unif$vpl)
-hist(vpl_unif$vpl, freq = FALSE)
-curve(dnorm(x, mean = m_unif, sd = std_unif), col = "darkblue", lwd = 2, 
-add = TRUE, yaxt = "n")
-summary(vpl_unif$vpl)
-
-## Simulacao de Monte Carlo com distribuicao beta e dependencia 100\%
-params <- list(vgv = c(shape1 = 2, shape2 = 2),
-               cc = c(shape1 = 2, shape2 = 2),
-               bdi_i = c(shape1 = 2, shape2 = 2),
-               bdi_c = c(shape1 = 2, shape2 = 2)
-)
-vpl_beta <- vpl_sim(Nsim, ranges = ranges, variables = variables, 
-                    distribution = "beta", params = params, 
-                    dependencia = dependencia100)
-
-m_beta <- mean(vpl_beta$vpl)
-std_beta <- sd(vpl_beta$vpl)
-ggplot(vpl_beta, aes(vpl)) +
- geom_histogram(aes(y =..density..), col="red", fill="green", alpha=.2) +
-  stat_function(
-    fun = dnorm,
-    args = list(mean = m_beta, sd = std_beta)
-  )
 }

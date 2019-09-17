@@ -44,7 +44,7 @@ g_precisao <- function(amplitude) {
   # Calcula a amplitude do intervalo
   amp <- amplitude
   
-  # Calcula o grau de precisão baseado na amplitude do intervalo  
+  # Calcula o grau de precisao baseado na amplitude do intervalo  
   if (is.null(amp)) gp <- NULL else {
     gp <- sapply(amp/100,  function (x) ifelse(x > .5, "Fora de Especifica\u00E7\u00E3o",
                                          ifelse(x <= .3, "III",

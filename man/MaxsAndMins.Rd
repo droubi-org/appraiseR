@@ -17,11 +17,9 @@ MaxsAndMins(newdata, data)
 Find out how much new data extrapolates the model data
 }
 \examples{
-library(dplyr)
-data(centro_2015)
-data <- centro_2015@data#' 
+dados <- centro_2015@data
 newdata <- 
-  centro_2015@data \%>\% 
+  dados \%>\% 
   filter(is.na(valor)) \%>\%
   select(-valor)
 MaxsAndMins(newdata, data)   

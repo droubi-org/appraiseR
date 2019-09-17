@@ -16,11 +16,11 @@ bestfitEst <- function(X, y, t, p, response){
   M <- cbind(y, X)
   colnames(M)[1] <- response
 
-  ## Calculo do R2 de cada combinação
+  ## Calculo do R2 de cada combinacao
   R2 <- vector(mode = "numeric", length = nrow(p))
 
-  ## Loop: a cada iteração, verifica apenas as transformações que mudaram da
-  ## iteração anterior
+  ## Loop: a cada iteracao, verifica apenas as transformacoes que mudaram da
+  ## iteracao anterior
   for (i in seq(nrow(p))){
     a <- p[i,][p[i-1,] != p[i,]]
     n <- paste(a, names(a), sep = ".")
@@ -30,7 +30,7 @@ bestfitEst <- function(X, y, t, p, response){
     R2[i] <- miscTools::rSquared(M[,response], fit$residuals)
   }
 
-  ## Calculo de R2 ajustado e formatação dos dados para impressão em tela
+  ## Calculo de R2 ajustado e formatacao dos dados para impressao em tela
   n <- nrow(M)
   gl <- fit$df.residual
   R2 <- 1-((n-1)/gl)*(1-R2)

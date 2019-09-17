@@ -18,8 +18,8 @@ NBR-14.653-2 .
 }
 \examples{
 ## newdata inside the data file
-data(centro_2015)
-fit <- lm(log(valor) ~ ., centro_2015@data)
+dados <- centro_2015@data
+fit <- lm(log(valor) ~ ., data = dados)
 extrapolate(object = fit)
 
 ## newdata provided as an argument

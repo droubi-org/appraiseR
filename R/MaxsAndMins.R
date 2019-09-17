@@ -10,11 +10,9 @@
 #' @export
 #'
 #' @examples
-#' library(dplyr)
-#' data(centro_2015)
-#' data <- centro_2015@data#' 
+#' dados <- centro_2015@data
 #' newdata <- 
-#'   centro_2015@data %>% 
+#'   dados %>% 
 #'   filter(is.na(valor)) %>%
 #'   select(-valor)
 #' MaxsAndMins(newdata, data)   
@@ -42,5 +40,5 @@ MaxsAndMins <- function(newdata, data) {
       unlist()
     df[[i]] <- x - pmin(x, maxs) + x - pmax(x, mins)  
   }
-  return(rbind_list(df))
+  return(dplyr::bind_rows(!!!df))
 }

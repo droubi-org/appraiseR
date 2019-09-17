@@ -9,8 +9,8 @@
 #' @export
 #' @examples
 #' ## newdata inside the data file
-#' data(centro_2015)
-#' fit <- lm(log(valor) ~ ., centro_2015@data)
+#' dados <- centro_2015@data
+#' fit <- lm(log(valor) ~ ., data = dados)
 #' extrapolate(object = fit)
 #' 
 #' ## newdata provided as an argument
@@ -36,8 +36,8 @@ extrapolate <- function(object, newdata){
   if (missing(newdata)) {
     newdata <- 
       data %>% 
-      filter(is.na(!!response)) %>% 
-      select(!!!preds)    
+      dplyr::filter(is.na(!!response)) %>% 
+      dplyr::select(!!!preds)    
   }
 
   extr <- MaxsAndMins(newdata, data)
@@ -82,7 +82,7 @@ extrapolate <- function(object, newdata){
   #   x <- apply(nvar_extrap, 1, function(x) if (x > 1) "I" else "II")
   # }
   return(list(newdata = newdata,
-              valor = extr,
+              valor = extr
               # percentual = extr_p,
               # fronteira = front,
               # grau_variaveis = y,

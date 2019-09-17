@@ -33,24 +33,24 @@ allperm <- function(data, subset, select = colnames(data),
   any_zero <- function(x) any(x == 0, na.rm = TRUE)
   zeros <- plyr::colwise(any_zero)(df)
 
-  # Nome das funções de transformação
+  # Nome das funcoes de transformacao
   nam_t <- c("identity", transf)
-  # Nomes das transformações que admitem como argumento o valor zero
+  # Nomes das transformacoes que admitem como argumento o valor zero
   nam_t2 <- setdiff(nam_t, c("rsqr", "rec", "rsqrt", "log"))
 
-  # permutacao de todas as transformações pelas variaveis de nam_t
+  # permutacao de todas as transformacoes pelas variaveis de nam_t
   if (sum(zeros == FALSE & factors == FALSE) > 0)
     perm1 <- gtools::permutations(n = length(nam_t),
                                   r = sum(zeros == FALSE & factors == FALSE),
                                   v = nam_t, repeats.allowed=T)
 
-  # permutacao de algumas transformações pelas variaveis de nam_t2
+  # permutacao de algumas transformacoes pelas variaveis de nam_t2
   if (sum(zeros == TRUE) > 0)
     perm2 <- gtools::permutations(n=length(nam_t2),
                                   r = sum(zeros == TRUE),
                                   v = nam_t2, repeats.allowed=T)
 
-  # Insere os nomes das variáveis de df nos data.frames perm1 e perm2
+  # Insere os nomes das variaveis de df nos data.frames perm1 e perm2
   colnames(perm1) <- intersect(colnames(df[which(zeros == FALSE)]),
                                colnames(df[which(factors == FALSE)]))
   colnames(perm2) <- colnames(df[which(zeros == TRUE)])

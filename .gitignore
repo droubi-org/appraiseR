@@ -5,3 +5,6 @@
 *.xlsx
 appraiseR.Rproj
 env.RData
+appraiseR.Rcheck/
+appraiseR*.tar.gz
+appraiseR*.tgz
